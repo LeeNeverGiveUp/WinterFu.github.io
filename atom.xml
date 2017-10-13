@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Zz_krystal的博客</title>
+  <icon>https://www.gravatar.com/avatar/1ad029f2f06011f9e9672d44109a2987</icon>
+  <subtitle>以梦为马不负韶华</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://winterfu.github.io/"/>
+  <updated>2017-10-12T13:32:19.165Z</updated>
+  <id>http://winterfu.github.io/</id>
+  
+  <author>
+    <name>Winter Fu</name>
+    <email>fuwinterdong@gmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mystest01</title>
+    <link href="http://winterfu.github.io/2017/10/12/mystest01/"/>
+    <id>http://winterfu.github.io/2017/10/12/mystest01/</id>
+    <published>2017-10-12T13:32:19.000Z</published>
+    <updated>2017-10-12T13:32:19.165Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
