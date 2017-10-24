@@ -6,7 +6,7 @@
   <title>那些年使用Git走过的坑 | Zz_krystal的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Git介绍&amp;ensp;&amp;ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。&amp;ensp;&amp;ensp;下面就来介绍一下Git的工作流程：   &amp;ensp;&amp;ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电">
-<meta name="keywords" content="Git">
+<meta name="keywords" content="Git,Github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="那些年使用Git走过的坑">
 <meta property="og:url" content="http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/images/SXJULG@_2~TFR%7D%7B9X2Z9FHH.png">
 <meta property="og:image" content="http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/images/G%7B8VWHF33X50KN@@2%7BB%5BL3P.png">
 <meta property="og:image" content="http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/images/M@%60%60@$O_Z_%5DR29YA9KIFVGU.png">
-<meta property="og:updated_time" content="2017-10-24T13:50:49.165Z">
+<meta property="og:updated_time" content="2017-10-24T14:01:41.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年使用Git走过的坑">
 <meta name="twitter:description" content="Git介绍&amp;ensp;&amp;ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。&amp;ensp;&amp;ensp;下面就来介绍一下Git的工作流程：   &amp;ensp;&amp;ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电">
@@ -148,7 +148,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Git/" style="font-size: 10px;">Git</a>
+                        <a href="/tags/Git-Github/" style="font-size: 10px;">Git,Github</a>
                     </div>
                 </section>
                 
@@ -250,7 +250,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git-Github/">Git,Github</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,10 +260,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：<br><img src="./images/SXJULG@_2~TFR%7D%7B9X2Z9FHH.png" alt="" title="SXJULG@_2~TFR}{9X2Z9FHH"></p>
+        <h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：<br><img src="./images/SXJULG@_2~TFR%7D%7B9X2Z9FHH.png" alt="Git工作流程" title="SXJULG@_2~TFR}{9X2Z9FHH"></p>
 <p>  &ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。</p>
-<p>  <img src="./images/G%7B8VWHF33X50KN@@2%7BB%5BL3P.png" alt=""></p>
-<p>  &ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。<br>  <img src="./images/M@%60%60@$O_Z_%5DR29YA9KIFVGU.png" alt="enter description here" title="M@``@$O_Z_]R29YA9KIFVGU"></p>
+<p>  <img src="./images/G%7B8VWHF33X50KN@@2%7BB%5BL3P.png" alt="Git工作流程"></p>
+<p>  &ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。<br>  <img src="./images/M@%60%60@$O_Z_%5DR29YA9KIFVGU.png" alt="Git工作流程" title="M@``@$O_Z_]R29YA9KIFVGU"></p>
 <p>  &ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
 <h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
 <li>如何实现将本地代码部署到GitHub上？</li>
@@ -336,7 +336,7 @@
         <p><span>本文标题:</span><a href="/2017/10/24/那些年使用Git走过的坑/">那些年使用Git走过的坑</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Winter Fu 的个人博客">Winter Fu</a></p>
         <p><span>发布时间:</span>2017年10月24日 - 20时14分</p>
-        <p><span>最后更新:</span>2017年10月24日 - 21时50分</p>
+        <p><span>最后更新:</span>2017年10月24日 - 22时01分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/24/那些年使用Git走过的坑/" title="那些年使用Git走过的坑">http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/</a>
             <span class="copy-path" data-clipboard-text="原文: http://winterfu.github.io/2017/10/24/那些年使用Git走过的坑/　　作者: Winter Fu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
