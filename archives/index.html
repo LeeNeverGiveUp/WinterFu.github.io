@@ -1,349 +1,440 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html>
-<head>
-  <meta charset="utf-8">
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
-  <title>Archives | Zz_krystal的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NEU小硕一只，攻于机器学习、数据挖掘、深度学习，业余歌手，爱生活，爱音乐！">
-<meta name="keywords" content="前端，机器学习，开发者,程序猿,程序媛，Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zz_krystal的博客">
-<meta property="og:url" content="http://winterfu.github.io/archives/index.html">
-<meta property="og:site_name" content="Zz_krystal的博客">
-<meta property="og:description" content="NEU小硕一只，攻于机器学习、数据挖掘、深度学习，业余歌手，爱生活，爱音乐！">
-<meta property="og:locale" content="zh-Hans">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zz_krystal的博客">
-<meta name="twitter:description" content="NEU小硕一只，攻于机器学习、数据挖掘、深度学习，业余歌手，爱生活，爱音乐！">
   
-    <link rel="alternative" href="/atom.xml" title="Zz_krystal的博客" type="application/atom+xml">
-  
+  <title>  归档 |   Winter-Fu</title>
+
+ 
   
     <link rel="icon" href="/img/favicon.png">
   
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: false,
-          isArchive: true,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
-</head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
             
-            <img lazy-src="/img/av.jpg" class="js-avatar">
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
             
-        </a>
+            
+            
 
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">Winter Fu</a></h1>
-        </hgroup>
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
 
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
         
-        <p class="header-subtitle">以梦为马不负韶华</p>
         
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
         
+        <section id="main" class="slideDownMin">
         
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
         
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">博客首页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/photos/">美好时光</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl mail" target="_blank" href="mailto:fuwinterdong@gmail.com" title="mail">mail</a>
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/WinterFu" title="github">github</a>
-                            
-                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/fu-dong-dong-84-84" title="zhihu">zhihu</a>
-                            
-                                <a class="fl weibo" target="_blank" href="http://weibo.com/u/5104916807" title="weibo">weibo</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Git-Github/" style="font-size: 10px;">Git,Github</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/WIinter_FDd">CSDN</a>
-                    
-                    </div>
-                </section>
-                
+         <section class="block fadeIn">
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战!</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Winter Fu</a></h1>
+    <span class="page-title">归档</span>  
+   
+     
+    
+      
+
+           
+
+      		<h3 class="archive-year">2017</h3>          
+
+      	  	  
+
+		    
+
+
+      <div class="animation-item  archive-item slideDownMin">   	
+
+        <span class="archive-date"> 11-28</span>    
+
+        <a class="archive-title" href="/2017/11/28/那些年使用Git走过的坑/">那些年使用Git走过的坑</a>
+
       </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/av.jpg" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">Winter Fu</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">以梦为马不负韶华</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">博客首页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/photos/">美好时光</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="mail" target="_blank" href="mailto:fuwinterdong@gmail.com" title="mail">mail</a>
-                    
-                        <a class="github" target="_blank" href="https://github.com/WinterFu" title="github">github</a>
-                    
-                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/fu-dong-dong-84-84" title="zhihu">zhihu</a>
-                    
-                        <a class="weibo" target="_blank" href="http://weibo.com/u/5104916807" title="weibo">weibo</a>
-                    
-                </div>
-            </nav>
-        </header>                
-    </div>
-</nav>
-      <div class="body-wrap">
-  
-  
-    
+
     
       
+
+        
+
+
+      <div class="animation-item  archive-item slideDownMin">   	
+
+        <span class="archive-date"> 11-28</span>    
+
+        <a class="archive-title" href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">Python中关于str（）函数和repr（）函数的那些事</a>
+
+      </div>
+
+    
+
+</section>
+
+</section>
+
+                  
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/10/24/那些年使用Git走过的坑/" class="archive-article-date">
-      <time datetime="2017-10-24T12:14:11.000Z" itemprop="datePublished">10-24</time>
-</a>
-        </div>
          
+
+ <aside id="sidebar" class="fadeIn">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/那些年使用Git走过的坑/">那些年使用Git走过的坑</a>
-    </h1>
+    
+
+<div class="widget profile">
+
+
+		<img class="avatar" src="/img/header.png" alt="No Avatar">
+					
+		<span class="author slideDownMin">Zz_Krystal</span>
+		
+		<span class="descrption slideDownMin">遇健就不再错过。</span>
+	
+		
+			<span class="location iconfont icon-location slideDownMin">ShenYang China</span>	
+		
+
+		<div class="social">
+   		    	
+		<a href="https://github.com/WinterFu" class="iconfont icon-github" target="_blank" title="github"></a>
+	        	
+		<a href="https://www.zhihu.com/people/fu-dong-dong-84-84" class="iconfont icon-zhihu" target="_blank" title="zhihu"></a>
+	        	
+		<a href="http://weibo.com/u/5104916807" class="iconfont icon-weibo" target="_blank" title="weibo"></a>
+	        	
+		<a href="https://www.facebook.com/fu.winter.3" class="iconfont icon-facebook" target="_blank" title="facebook"></a>
+	        	
+		<a href="http://mashable.com/" class="iconfont icon-twitter" target="_blank" title="twitter"></a>
+	        	
+		<a href="https://www.instagram.com/Zz_Krytsal/" class="iconfont icon-instagram" target="_blank" title="instagram"></a>
+	        	
+		<a href="/" class="iconfont icon-others" target="_blank" title="others"></a>
+	    
+    	</div>
+			
+		<div class="count">
+			
+			<div class="count-item">
+			<a class="slideDownMin" href="/archives">					
+			2<br/>文章</a>
+			</div>	
+
+			
+			<div class="count-item">
+			<a class="slideDownMin" href="/categories">	
+			2<br/>分类</a>
+			</div>
+
+
+
+		</div>
+</div>
   
+    <div class="search-widget">
+	<span  class="search-word">  搜索 </span>
+	<i class="iconfont icon-search"></i>
+</div>
+  
+    
+  <div class="widget">
 
-        <div class="article-info info-on-archive">
-          
+   	  <a href="/archives"><span class="widget-title">最近文章</span></a>
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git-Github/">Git,Github</a></li></ul>
-    </div>
+   	 	
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+                
+
+        	
+
+            <a class="recent-post slideDownMin animation-border-item" href="/2017/11/28/那些年使用Git走过的坑/">
+
+            那些年使用Git走过的坑
+
+            </a>          
+                
+
+        	
+
+            <a class="recent-post slideDownMin animation-border-item" href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">
+
+            Python中关于str（）函数和repr（）函数的那些事
+
+            </a>          
+             
   </div>
-</article>
+
+
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/10/12/Python中关于str（）函数和repr（）函数的那些事/" class="archive-article-date">
-      <time datetime="2017-10-12T13:32:19.000Z" itemprop="datePublished">10-12</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/12/Python中关于str（）函数和repr（）函数的那些事/">Python中关于str( )函数和repr( )的那些事</a>
-    </h1>
-  
+<div class="widget">	
+    <a href="/categories"><span class="widget-title">分类</span></a>
+ 	
 
-        <div class="article-info info-on-archive">
-          
+     <div>
+         	
+      	
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      <a class="meta-item slideDownMin" href="/categories/python学习/">python学习
+      <span class="meta-count">1</span>	
+      	
+      	</a>
+         	
+      	
 
-    
+      <a class="meta-item slideDownMin" href="/categories/教程/">教程
+      <span class="meta-count">1</span>	
+      	
+      	</a>
+      
+
+     </div>
 
 </div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 Winter Fu
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >冬虫到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
-</footer>
 
-    </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
+
+  
+    
+  <div class="widget">
+
+     <a href="/tags"><span class="widget-title">标签</span></a>
+
+     	<div>
+       
+
+        	<a class="meta-item slideDownMin" href="/tags/python-str-repr/">python,str,repr
+        	<span class="meta-count">1</span>
+        	</a>    		
+    	
+	   
+
+        	<a class="meta-item slideDownMin" href="/tags/Git-Github/">Git,Github
+        	<span class="meta-count">1</span>
+        	</a>    		
+    	
+	   
+       </div>
+  </div>
+
+  
+    <div class="widget" >
+	
+<span class="widget-title">友链</span>
+
+	<div>
+			
+			<ul class="ul links">
+				
+					<li class="li link-item slideDownMin">
+						<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank" title="Winter">Winter</a>
+					</li>
+				
+					<li class="li link-item slideDownMin">
+						<a href="http://blog.csdn.net/wiinter_fdd" target="_blank" title="CSDN">CSDN</a>
+					</li>
+				
+			</ul>
+		
+	</div>
+</div>
+  
+</aside>
+
+      
+    
+    
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+
+	 2017
+	 Zz_Krystal	 
+
+	 </div>
+</footer> 
+    
+
 
 
 <!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -352,65 +443,7 @@ ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
-
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
-
-    <button class="hide-labels">TAG 开关</button>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js">
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
-
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
-
-
-  </div>
-</body>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
 </html>

@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://winterfu.github.io/2017/10/24/%E9%82%A3%E4%BA%9B%E5%B9%B4%E4%BD%BF%E7%94%A8Git%E8%B5%B0%E8%BF%87%E7%9A%84%E5%9D%91/</loc>
+    <loc>http://winterfu.github.io/about/index.html</loc>
     
-    <lastmod>2017-10-24T14:01:41.423Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://winterfu.github.io/2017/10/12/Python%E4%B8%AD%E5%85%B3%E4%BA%8Estr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%92%8Crepr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
-    
-    <lastmod>2017-10-13T14:20:39.993Z</lastmod>
+    <lastmod>2017-11-28T14:20:10.229Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://winterfu.github.io/photos/ins.json</loc>
+    <loc>http://winterfu.github.io/2017/11/28/%E9%82%A3%E4%BA%9B%E5%B9%B4%E4%BD%BF%E7%94%A8Git%E8%B5%B0%E8%BF%87%E7%9A%84%E5%9D%91/</loc>
     
-    <lastmod>2017-07-28T18:51:08.000Z</lastmod>
+    <lastmod>2017-11-28T14:18:06.298Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://winterfu.github.io/photos/index.html</loc>
+    <loc>http://winterfu.github.io/2017/11/28/Python%E4%B8%AD%E5%85%B3%E4%BA%8Estr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%92%8Crepr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
     
-    <lastmod>2017-07-28T18:51:08.000Z</lastmod>
+    <lastmod>2017-11-28T13:37:48.598Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winterfu.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-11-28T11:28:13.617Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://winterfu.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-11-28T11:13:22.716Z</lastmod>
     
   </url>
   

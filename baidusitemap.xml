@@ -3,40 +3,46 @@
 
 
     
+    
   <url>
-    <loc>http://winterfu.github.io/2017/10/24/%E9%82%A3%E4%BA%9B%E5%B9%B4%E4%BD%BF%E7%94%A8Git%E8%B5%B0%E8%BF%87%E7%9A%84%E5%9D%91/</loc>
-    <lastmod>2017-10-24T14:01:41.423Z</lastmod>
+    <loc>http://winterfu.github.io/2017/11/28/%E9%82%A3%E4%BA%9B%E5%B9%B4%E4%BD%BF%E7%94%A8Git%E8%B5%B0%E8%BF%87%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2017-11-28T14:18:06.298Z</lastmod>
     <data>
         <display>
         <title>那些年使用Git走过的坑</title>
-        <pubTime>2017-10-24T12:14:11.000Z</pubTime>
+        <pubTime>2017-11-28T13:43:31.000Z</pubTime>
         
         <tag>Git,Github</tag>
          
          
            
+             
+              <breadCrumb title="教程" url="http://winterfu.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+          
         </display>
     </data>
     </url>
 
     
   <url>
-    <loc>http://winterfu.github.io/2017/10/12/Python%E4%B8%AD%E5%85%B3%E4%BA%8Estr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%92%8Crepr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
-    <lastmod>2017-10-13T14:20:39.993Z</lastmod>
+    <loc>http://winterfu.github.io/2017/11/28/Python%E4%B8%AD%E5%85%B3%E4%BA%8Estr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%92%8Crepr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
+    <lastmod>2017-11-28T13:37:48.598Z</lastmod>
     <data>
         <display>
-        <title>Python中关于str( )函数和repr( )的那些事</title>
-        <pubTime>2017-10-12T13:32:19.000Z</pubTime>
+        <title>Python中关于str（）函数和repr（）函数的那些事</title>
+        <pubTime>2017-11-28T13:34:40.000Z</pubTime>
         
+        <tag>python,str,repr</tag>
+         
          
            
+             
+              <breadCrumb title="python学习" url="http://winterfu.github.io/categories/python%E5%AD%A6%E4%B9%A0/"/>
+          
         </display>
     </data>
     </url>
 
-    
-    
-    
     
     
 </urlset>

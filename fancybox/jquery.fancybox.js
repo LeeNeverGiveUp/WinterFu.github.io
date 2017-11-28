@@ -1,12 +1,12 @@
 /*!
  * fancyBox - jQuery Plugin
- * version: 2.1.5 (Fri, 14 Jun 2013)
+ * version: 2.1.7 (Tue, 28 Feb 2017)
  * requires jQuery v1.6 or later
  *
  * Examples at http://fancyapps.com/fancybox/
  * License: www.fancyapps.com/fancybox/#license
  *
- * Copyright 2012 Janis Skarnelis - janis@fancyapps.com
+ * Copyright 2017 fancyapps.com
  *
  */
 
@@ -50,7 +50,7 @@
 
 	$.extend(F, {
 		// The current version of fancyBox
-		version: '2.1.5',
+		version: '2.1.7',
 
 		defaults: {
 			padding : 15,
@@ -1222,7 +1222,7 @@
 			if (current.type === 'iframe') {
 				iframe = current.content;
 
-				if (current.autoHeight && iframe.data('ready') === 1) {
+				if (current.autoHeight && iframe && iframe.data('ready') === 1) {
 					try {
 						if (iframe[0].contentWindow.document.location) {
 							inner.width( origWidth ).height(9999);
@@ -1829,7 +1829,7 @@
 		beforeShow : function(opts, obj) {
 			if (obj.locked && !this.el.hasClass('fancybox-lock')) {
 				if (this.fixPosition !== false) {
-					$('*').filter(function(){
+					$('*:not(object)').filter(function(){
 						return ($(this).css('position') === 'fixed' && !$(this).hasClass("fancybox-overlay") && !$(this).hasClass("fancybox-wrap") );
 					}).addClass('fancybox-margin');
 				}
