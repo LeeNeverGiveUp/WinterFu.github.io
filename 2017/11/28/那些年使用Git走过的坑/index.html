@@ -40,35 +40,35 @@
               
             
 
-              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              <a class="header-menu-link" id="header-menu-home" href="/">HOME
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">ARICHIVES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">CATEGORIES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">TAGS
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              <a class="header-menu-link" id="header-menu-about" href="/about">ABOUT
               </a>     
 
             
@@ -110,7 +110,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		1193
+		1194
 		</span>
 
 
@@ -144,8 +144,9 @@ AV.init({
 
   <div class="post-content slideDownMin">
    
-    <h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
-<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。</p>
+    <p><img src="/2017/11/28/那些年使用Git走过的坑/about1.jpg" alt=""></p>
+<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
+<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。<br><a id="more"></a></p>
 <p>&ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。</p>
 <p>&ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
 <h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
@@ -304,9 +305,9 @@ AV.init({
 <script>
 //set the placeholder
 $(function(){
-    $('.vnick').attr('placeholder','昵称');
-    $('.veditor').attr('placeholder','说点什么吧...');
-    $('.vmail').attr('placeholder','邮箱');   
+    $('.vnick').attr('placeholder','NickName');
+    $('.veditor').attr('placeholder','Typing Something');
+    $('.vmail').attr('placeholder','Mail');   
 })
 </script>
 
@@ -320,16 +321,16 @@ $(function(){
   <div class="post-widget">
     
     <a class="post-widget-title iconfont icon-category" href="/categories">
-    分类</a>
+    Categories</a>
 
 
     <div class="small-tag">
          
-          <a href="/categories/python学习/">python学习</a>     
+          <a href="/categories/生活随想/">生活随想</a>     
          
           <a href="/categories/教程/">教程</a>     
          
-          <a href="/categories/生活随想/">生活随想</a>     
+          <a href="/categories/python学习/">python学习</a>     
         
     </div>
 
@@ -341,7 +342,7 @@ $(function(){
   
   <div class="post-widget">
     
-    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> Tags</a>
 
 
     <div class="small-tag">
@@ -363,7 +364,7 @@ $(function(){
 
 	<div class="toc-container">	
 
-	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+	<span class="toc-contents iconfont icon-open" onclick="change()"> Contents </span>
 
 	<ul class="toc-list"></ul>
 
@@ -411,7 +412,7 @@ $(function(){
 <script src="/js/search.js"></script>     
           
           <div class="search-container">
-            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+            <input type="text" placeholder="Typing Something" id="search-input" class="search-input">  
               <span class="search-cancel iconfont icon-cancel"></span>
               <div id="search-result" class="search-result"></div>
           </div>
@@ -426,37 +427,37 @@ $(function(){
          
             
 
-            <a class="mobile-menu-link" href="/">首页
+            <a class="mobile-menu-link" href="/">HOME
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/archives">归档
+            <a class="mobile-menu-link" href="/archives">ARICHIVES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/categories">分类
+            <a class="mobile-menu-link" href="/categories">CATEGORIES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/tags">标签
+            <a class="mobile-menu-link" href="/tags">TAGS
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/about">关于
+            <a class="mobile-menu-link" href="/about">ABOUT
             </a>
             
          
                           
 
-            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
             
          
 </div>     

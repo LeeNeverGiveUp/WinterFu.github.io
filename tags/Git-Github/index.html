@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  标签: Git,Github |   Zz-Krystal</title>
+  <title>  Tags: Git,Github |   Zz-Krystal</title>
 
  
   
@@ -40,35 +40,35 @@
               
             
 
-              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              <a class="header-menu-link" id="header-menu-home" href="/">HOME
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">ARICHIVES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">CATEGORIES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">TAGS
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              <a class="header-menu-link" id="header-menu-about" href="/about">ABOUT
               </a>     
 
             
@@ -117,32 +117,17 @@
 
   
 
-  	<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
-<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。</p>
-<p>&ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。</p>
-<p>&ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
-<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
-<li>如何实现将本地代码部署到GitHub上？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. Github New Project 【ProjectName】（下称PN）</div><div class="line"><span class="number">2</span>. Copy PN的git地址</div><div class="line"><span class="number">3</span>. 切到本地终端，cd到Project下</div><div class="line"><span class="number">4</span>. git init</div><div class="line"><span class="number">5</span>. git remote add origin 【Copy的url】</div><div class="line"><span class="number">6</span>. git add .</div><div class="line"><span class="number">7</span>. git commit -m <span class="string">"Init Project"</span></div><div class="line"><span class="number">8</span>. git pull —rebase origin master（Github上New Project的时候如果初始化了READ.MD就要走这一步，否则不用；默认不会初始化的）</div><div class="line"><span class="number">9</span>. git push origin master</div></pre></td></tr></table></figure>
-<ol>
-<li>如何将别人GitHub上的工程下载下来然后自己修改后再上传上去？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. git clone URL 到本地</div><div class="line"><span class="number">2</span>. 修改了本地的<span class="selector-tag">a</span>.py文件</div><div class="line"><span class="number">3</span>. git add .</div><div class="line">4. git commit -m "update a.py"     # 是为了将改动提交到本地git</div><div class="line">5. git pull —rebase origin master   # 是为了拉远端代码到本地</div><div class="line">6. git push origin master               # 是为了推本地代码到远端</div><div class="line">注意第<span class="number">5</span>步，之所以要进行，是因为可能你改动<span class="selector-tag">a</span>.py的同时，我也改动了<span class="selector-tag">a</span>.py，然后我比你先推上去这个时候你如果不pull远端的代码就直接覆盖了。</div></pre></td></tr></table></figure>
-<ol>
-<li>如何回退到之前的版本，并实现远端和本地的回退？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span><span class="selector-class">.git</span> status</div><div class="line"><span class="number">2</span>. git pull —rebase origin master</div><div class="line"><span class="number">3</span>. git status</div><div class="line"><span class="number">4</span>. git log   #找出你要回退的commit ID  </div><div class="line"><span class="number">5</span>. <span class="selector-id">#git</span> reset —hard [上一步的commitID]  当然也可以使用 --hard HEAD^ 来逐个查询</div><div class="line"><span class="number">6</span>. git status   #执行完此步后可以看你的文件是不是返回到了修改之前</div><div class="line"><span class="number">7</span>. git push origin master -f     #如果不强推可以实现那就不用加 -f</div></pre></td></tr></table></figure>
-<p>更多重要的内容可以参照<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>，这样将有助于更好的了解Git的相关知识，让你更便捷的管理你的文件。</p>
- 
+  	<p><img src="/2017/11/28/那些年使用Git走过的坑/about1.jpg" alt=""></p>
+<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
+<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。<br></p>
 
-    
+     
 
 </div>		
 
     
 
-  	<a class="article-readmore" href="/2017/11/28/那些年使用Git走过的坑/">阅读更多</a> 	
+  	<a class="article-readmore" href="/2017/11/28/那些年使用Git走过的坑/">Read More</a> 	
 	
 </article>     
       	
@@ -193,13 +178,13 @@
 			
 			<div class="count-item">
 			<a class="slideDownMin" href="/archives">					
-			3<br/>文章</a>
+			3<br/>Posts</a>
 			</div>	
 
 			
 			<div class="count-item">
 			<a class="slideDownMin" href="/categories">	
-			3<br/>分类</a>
+			3<br/>Categories</a>
 			</div>
 
 
@@ -208,14 +193,14 @@
 </div>
   
     <div class="search-widget">
-	<span  class="search-word">  搜索 </span>
+	<span  class="search-word">  Search </span>
 	<i class="iconfont icon-search"></i>
 </div>
   
     
   <div class="widget">
 
-   	  <a href="/archives"><span class="widget-title">最近文章</span></a>
+   	  <a href="/archives"><span class="widget-title">Recents</span></a>
 
    	 	
 
@@ -253,14 +238,14 @@
   
     
 <div class="widget">	
-    <a href="/categories"><span class="widget-title">分类</span></a>
+    <a href="/categories"><span class="widget-title">Categories</span></a>
  	
 
      <div>
          	
       	
 
-      <a class="meta-item slideDownMin" href="/categories/python学习/">python学习
+      <a class="meta-item slideDownMin" href="/categories/生活随想/">生活随想
       <span class="meta-count">1</span>	
       	
       	</a>
@@ -274,7 +259,7 @@
          	
       	
 
-      <a class="meta-item slideDownMin" href="/categories/生活随想/">生活随想
+      <a class="meta-item slideDownMin" href="/categories/python学习/">python学习
       <span class="meta-count">1</span>	
       	
       	</a>
@@ -290,12 +275,12 @@
     
   <div class="widget">
 
-     <a href="/tags"><span class="widget-title">标签</span></a>
+     <a href="/tags"><span class="widget-title">Tags</span></a>
 
      	<div>
        
 
-        	<a class="meta-item slideDownMin" href="/tags/python-str-repr/">python,str,repr
+        	<a class="meta-item slideDownMin" href="/tags/生活，小情趣，大道理/">生活，小情趣，大道理
         	<span class="meta-count">1</span>
         	</a>    		
     	
@@ -307,7 +292,7 @@
     	
 	   
 
-        	<a class="meta-item slideDownMin" href="/tags/生活，小情趣，大道理/">生活，小情趣，大道理
+        	<a class="meta-item slideDownMin" href="/tags/python-str-repr/">python,str,repr
         	<span class="meta-count">1</span>
         	</a>    		
     	
@@ -318,7 +303,7 @@
   
     <div class="widget" >
 	
-<span class="widget-title">友链</span>
+<span class="widget-title">Friends</span>
 
 	<div>
 			
@@ -375,7 +360,7 @@
 <script src="/js/search.js"></script>     
           
           <div class="search-container">
-            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+            <input type="text" placeholder="Typing Something" id="search-input" class="search-input">  
               <span class="search-cancel iconfont icon-cancel"></span>
               <div id="search-result" class="search-result"></div>
           </div>
@@ -390,37 +375,37 @@
          
             
 
-            <a class="mobile-menu-link" href="/">首页
+            <a class="mobile-menu-link" href="/">HOME
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/archives">归档
+            <a class="mobile-menu-link" href="/archives">ARICHIVES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/categories">分类
+            <a class="mobile-menu-link" href="/categories">CATEGORIES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/tags">标签
+            <a class="mobile-menu-link" href="/tags">TAGS
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/about">关于
+            <a class="mobile-menu-link" href="/about">ABOUT
             </a>
             
          
                           
 
-            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
             
          
 </div>     

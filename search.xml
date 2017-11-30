@@ -5,9 +5,10 @@
     <entry>
       <title><![CDATA[那些让整个人都通透了的回复]]></title>
       <url>/2017/11/30/%E9%82%A3%E4%BA%9B%E8%AE%A9%E6%95%B4%E4%B8%AA%E4%BA%BA%E9%83%BD%E9%80%9A%E9%80%8F%E4%BA%86%E7%9A%84%E5%9B%9E%E5%A4%8D/</url>
-      <content type="html"><![CDATA[<p><img src="about1.jpg" alt=""><br>1、交朋友的标准是什么？<br>答：出世的智者，入世的强者，或者正常而阳光的普通人。</p>
+      <content type="html"><![CDATA[<p><img src="/2017/11/30/那些让整个人都通透了的回复/about.jpg" alt=""></p>
+<p>1、交朋友的标准是什么？<br>答：出世的智者，入世的强者，或者正常而阳光的普通人。</p>
 <p>2、男性更看重女性的身材、脸蛋，还是思想？<br>答：脸蛋和身材决定了我是否想去了解她的思想，思想决定了我是否会一票否决掉她的脸蛋和身材。</p>
-<p>3、“别让孩子输在起跑线上”有道理吗？<br>答：一辈子都要和别人去比较，是人生悲剧的源头。</p>
+<p>3、“别让孩子输在起跑线上”有道理吗？<br>答：一辈子都要和别人去比较，是人生悲剧的源头。<br><a id="more"></a></p>
 <p>4、做哪些事情可以提升生活品质？<br>答：定期扔东西。</p>
 <p>5、结婚以后两个人在一起最重要的是什么？<br>答：就当这婚还没结。</p>
 <p>6、怎么反驳“你行你上啊”的逻辑？<br>答：“我评论个电冰箱，自己还得会制冷啊？”</p>
@@ -73,8 +74,9 @@
     <entry>
       <title><![CDATA[那些年使用Git走过的坑]]></title>
       <url>/2017/11/28/%E9%82%A3%E4%BA%9B%E5%B9%B4%E4%BD%BF%E7%94%A8Git%E8%B5%B0%E8%BF%87%E7%9A%84%E5%9D%91/</url>
-      <content type="html"><![CDATA[<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
-<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。</p>
+      <content type="html"><![CDATA[<p><img src="/2017/11/28/那些年使用Git走过的坑/about1.jpg" alt=""></p>
+<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
+<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。<br><a id="more"></a></p>
 <p>&ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。</p>
 <p>&ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
 <h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
@@ -110,8 +112,8 @@
     <entry>
       <title><![CDATA[Python中关于str（）函数和repr（）函数的那些事]]></title>
       <url>/2017/11/28/Python%E4%B8%AD%E5%85%B3%E4%BA%8Estr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%92%8Crepr%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</url>
-      <content type="html"><![CDATA[<p>相信很多小伙伴跟我一样，对于Python中的str函数和repr函数，有很多地方都是很不解，博主也是这样，于是决定从最开始的文档，然后一个一个print去看结果然后，就这样一直print，print总算是大致上理解其区别，话不多少直接上例子。</p>
-<p> Python中的str( )和repr( )两个函数的区别，都是可以将任意的值转化为字符串：函数str( )将其转化成为适于人阅读的形式，而repr(object)就是转换成为阅读器阅读的形式， 返回一个可以用来表示对象的可打印字符串，用eval( )函数还可以返回相应的对象，下面直接上例子来说明这两个函数的用法。</p>
+      <content type="html"><![CDATA[<p><img src="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/TheCoast.jpg" alt=""><br>相信很多小伙伴跟我一样，对于Python中的str函数和repr函数，有很多地方都是很不解，博主也是这样，于是决定从最开始的文档，然后一个一个print去看结果然后，就这样一直print，print总算是大致上理解其区别，话不多少直接上例子。</p>
+<p>Python中的str( )和repr( )两个函数的区别，都是可以将任意的值转化为字符串：函数str( )将其转化成为适于人阅读的形式，而repr(object)就是转换成为阅读器阅读的形式， 返回一个可以用来表示对象的可打印字符串，用eval( )函数还可以返回相应的对象，下面直接上例子来说明这两个函数的用法。<br><a id="more"></a></p>
 <h3 id="对于字符串：-a-‘hello-world-n’"><a href="#对于字符串：-a-‘hello-world-n’" class="headerlink" title="对于字符串：  a = ‘hello, world!\n’"></a><strong>对于字符串：  a = ‘hello, world!\n’</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a</div><div class="line">&apos;hello, world!\n&apos;     #输出的a本来的模样</div><div class="line">&gt;&gt;&gt; print(a)          #对a经过加工后输出，将转义字符进行转义</div><div class="line">hello,world!</div><div class="line">&gt;&gt;&gt; print(str(a))     #可以看到对str返回的值进行print处理，这将与直接print（a）得到相同的结果</div><div class="line">hello,world!    </div><div class="line">&gt;&gt;&gt; repr(a)           #获得一种机器阅读的形式，也就是这个变量背地里是什么样子的。</div><div class="line">&quot;&apos;hello, world!\n&apos;&quot;</div><div class="line">&gt;&gt;&gt; print(repr(a))    #对于repr返回的值进行print处理，可以看到这与直接在终端输入a，得到的是相同的结果</div><div class="line">&apos;hello,world!\n&apos;</div></pre></td></tr></table></figure>
 <p>以上就是最基本的在字符串的显示中的使用，对应指令和输出结果及注释相信大家很容易都能看明白，接下来说一下这两个函数另外的作用。</p>
 <p>###<strong>在类中的使用，可以定义一些在实例运行时，控制repr()函数作用在其实例上时的行为。</strong></p>

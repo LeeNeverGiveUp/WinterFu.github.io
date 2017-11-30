@@ -40,35 +40,35 @@
               
             
 
-              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              <a class="header-menu-link" id="header-menu-home" href="/">HOME
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">ARICHIVES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">CATEGORIES
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">TAGS
               </a>     
 
             
             
             
 
-              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              <a class="header-menu-link" id="header-menu-about" href="/about">ABOUT
               </a>     
 
             
@@ -144,8 +144,8 @@ AV.init({
 
   <div class="post-content slideDownMin">
    
-    <p>相信很多小伙伴跟我一样，对于Python中的str函数和repr函数，有很多地方都是很不解，博主也是这样，于是决定从最开始的文档，然后一个一个print去看结果然后，就这样一直print，print总算是大致上理解其区别，话不多少直接上例子。</p>
-<p> Python中的str( )和repr( )两个函数的区别，都是可以将任意的值转化为字符串：函数str( )将其转化成为适于人阅读的形式，而repr(object)就是转换成为阅读器阅读的形式， 返回一个可以用来表示对象的可打印字符串，用eval( )函数还可以返回相应的对象，下面直接上例子来说明这两个函数的用法。</p>
+    <p><img src="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/TheCoast.jpg" alt=""><br>相信很多小伙伴跟我一样，对于Python中的str函数和repr函数，有很多地方都是很不解，博主也是这样，于是决定从最开始的文档，然后一个一个print去看结果然后，就这样一直print，print总算是大致上理解其区别，话不多少直接上例子。</p>
+<p>Python中的str( )和repr( )两个函数的区别，都是可以将任意的值转化为字符串：函数str( )将其转化成为适于人阅读的形式，而repr(object)就是转换成为阅读器阅读的形式， 返回一个可以用来表示对象的可打印字符串，用eval( )函数还可以返回相应的对象，下面直接上例子来说明这两个函数的用法。<br><a id="more"></a></p>
 <h3 id="对于字符串：-a-‘hello-world-n’"><a href="#对于字符串：-a-‘hello-world-n’" class="headerlink" title="对于字符串：  a = ‘hello, world!\n’"></a><strong>对于字符串：  a = ‘hello, world!\n’</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a</div><div class="line">&apos;hello, world!\n&apos;     #输出的a本来的模样</div><div class="line">&gt;&gt;&gt; print(a)          #对a经过加工后输出，将转义字符进行转义</div><div class="line">hello,world!</div><div class="line">&gt;&gt;&gt; print(str(a))     #可以看到对str返回的值进行print处理，这将与直接print（a）得到相同的结果</div><div class="line">hello,world!    </div><div class="line">&gt;&gt;&gt; repr(a)           #获得一种机器阅读的形式，也就是这个变量背地里是什么样子的。</div><div class="line">&quot;&apos;hello, world!\n&apos;&quot;</div><div class="line">&gt;&gt;&gt; print(repr(a))    #对于repr返回的值进行print处理，可以看到这与直接在终端输入a，得到的是相同的结果</div><div class="line">&apos;hello,world!\n&apos;</div></pre></td></tr></table></figure>
 <p>以上就是最基本的在字符串的显示中的使用，对应指令和输出结果及注释相信大家很容易都能看明白，接下来说一下这两个函数另外的作用。</p>
 <p>###<strong>在类中的使用，可以定义一些在实例运行时，控制repr()函数作用在其实例上时的行为。</strong></p>
@@ -296,9 +296,9 @@ AV.init({
 <script>
 //set the placeholder
 $(function(){
-    $('.vnick').attr('placeholder','昵称');
-    $('.veditor').attr('placeholder','说点什么吧...');
-    $('.vmail').attr('placeholder','邮箱');   
+    $('.vnick').attr('placeholder','NickName');
+    $('.veditor').attr('placeholder','Typing Something');
+    $('.vmail').attr('placeholder','Mail');   
 })
 </script>
 
@@ -312,16 +312,16 @@ $(function(){
   <div class="post-widget">
     
     <a class="post-widget-title iconfont icon-category" href="/categories">
-    分类</a>
+    Categories</a>
 
 
     <div class="small-tag">
          
-          <a href="/categories/python学习/">python学习</a>     
+          <a href="/categories/生活随想/">生活随想</a>     
          
           <a href="/categories/教程/">教程</a>     
          
-          <a href="/categories/生活随想/">生活随想</a>     
+          <a href="/categories/python学习/">python学习</a>     
         
     </div>
 
@@ -333,7 +333,7 @@ $(function(){
   
   <div class="post-widget">
     
-    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> Tags</a>
 
 
     <div class="small-tag">
@@ -355,7 +355,7 @@ $(function(){
 
 	<div class="toc-container">	
 
-	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+	<span class="toc-contents iconfont icon-open" onclick="change()"> Contents </span>
 
 	<ul class="toc-list"></ul>
 
@@ -403,7 +403,7 @@ $(function(){
 <script src="/js/search.js"></script>     
           
           <div class="search-container">
-            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+            <input type="text" placeholder="Typing Something" id="search-input" class="search-input">  
               <span class="search-cancel iconfont icon-cancel"></span>
               <div id="search-result" class="search-result"></div>
           </div>
@@ -418,37 +418,37 @@ $(function(){
          
             
 
-            <a class="mobile-menu-link" href="/">首页
+            <a class="mobile-menu-link" href="/">HOME
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/archives">归档
+            <a class="mobile-menu-link" href="/archives">ARICHIVES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/categories">分类
+            <a class="mobile-menu-link" href="/categories">CATEGORIES
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/tags">标签
+            <a class="mobile-menu-link" href="/tags">TAGS
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/about">关于
+            <a class="mobile-menu-link" href="/about">ABOUT
             </a>
             
          
                           
 
-            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
             
          
 </div>     
