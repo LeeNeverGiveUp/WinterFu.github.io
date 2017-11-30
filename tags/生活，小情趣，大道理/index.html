@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  分类: python学习 |   Zz-Krystal</title>
+  <title>  标签: 生活，小情趣，大道理 |   Zz-Krystal</title>
 
  
   
@@ -93,23 +93,23 @@
 
          <section class="block fadeIn">
 
+
   
 
-  	<span class="page-title"># python学习</span>
-
-	   
-
-    <article class="article fadeIn">	
+    	<span  class="page-title"># 生活，小情趣，大道理</span>		
+      	
+      	    	
+          <article class="article fadeIn">	
 	
 	
     <div class="article-header">
     
-     <a class="article-title"  href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">Python中关于str（）函数和repr（）函数的那些事</a>     
+     <a class="article-title"  href="/2017/11/30/那些让整个人都通透了的回复/">那些让整个人都通透了的回复</a>     
 
 
 	 
 
-	 <time>2017-11-28 </time>    
+	 <time>2017-11-30 </time>    
 </div>      
     <div class="article-excerpt">	
 	
@@ -117,24 +117,54 @@
 
   
 
-  	<p>相信很多小伙伴跟我一样，对于Python中的str函数和repr函数，有很多地方都是很不解，博主也是这样，于是决定从最开始的文档，然后一个一个print去看结果然后，就这样一直print，print总算是大致上理解其区别，话不多少直接上例子。</p>
-<p> Python中的str( )和repr( )两个函数的区别，都是可以将任意的值转化为字符串：函数str( )将其转化成为适于人阅读的形式，而repr(object)就是转换成为阅读器阅读的形式， 返回一个可以用来表示对象的可打印字符串，用eval( )函数还可以返回相应的对象，下面直接上例子来说明这两个函数的用法。</p>
-<h3 id="对于字符串：-a-‘hello-world-n’"><a href="#对于字符串：-a-‘hello-world-n’" class="headerlink" title="对于字符串：  a = ‘hello, world!\n’"></a><strong>对于字符串：  a = ‘hello, world!\n’</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a</div><div class="line">&apos;hello, world!\n&apos;     #输出的a本来的模样</div><div class="line">&gt;&gt;&gt; print(a)          #对a经过加工后输出，将转义字符进行转义</div><div class="line">hello,world!</div><div class="line">&gt;&gt;&gt; print(str(a))     #可以看到对str返回的值进行print处理，这将与直接print（a）得到相同的结果</div><div class="line">hello,world!    </div><div class="line">&gt;&gt;&gt; repr(a)           #获得一种机器阅读的形式，也就是这个变量背地里是什么样子的。</div><div class="line">&quot;&apos;hello, world!\n&apos;&quot;</div><div class="line">&gt;&gt;&gt; print(repr(a))    #对于repr返回的值进行print处理，可以看到这与直接在终端输入a，得到的是相同的结果</div><div class="line">&apos;hello,world!\n&apos;</div></pre></td></tr></table></figure>
-<p>以上就是最基本的在字符串的显示中的使用，对应指令和输出结果及注释相信大家很容易都能看明白，接下来说一下这两个函数另外的作用。</p>
-<p>###<strong>在类中的使用，可以定义一些在实例运行时，控制repr()函数作用在其实例上时的行为。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class test(object):</div><div class="line">     def __init__(self, data):</div><div class="line">          self.data = data</div><div class="line"></div><div class="line">仅仅是这样的话我们进行如下操作：</div><div class="line"></div><div class="line">&gt;&gt;&gt; t = test(100)</div><div class="line">&gt;&gt;&gt; t</div><div class="line">&lt;__main__.test at 0x4db85f8&gt;</div><div class="line">&gt;&gt;&gt; print(t)</div><div class="line">&lt;__main__.test at 0x4db85f8&gt;</div><div class="line">&gt;&gt;&gt; str(t)</div><div class="line">&apos;&lt;__main__.test at 0x4db85f8&gt;&apos;</div><div class="line">&gt;&gt;&gt; repr(t)</div><div class="line">&apos;&lt;__main__.test at 0x4db85f8&gt;&apos;</div></pre></td></tr></table></figure>
-<p>在类中没有方法的时候，如果直接在终端输入类的实例，不会输出任何东西的，上面显示的内容是由于类的特殊方法（基本定制型）有<strong>str</strong>()和<strong>repr</strong>()， 在print(object)和直接运行实例的时候回打印字符串。如果没有实现（覆盖）该函数，就会出现上面的结果。</p>
-<p>那我们定义一个str函数来看看效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class test(object):</div><div class="line">     def __init__(self, data):</div><div class="line">          self.data = data</div><div class="line">     def __str__(self):</div><div class="line">          return &quot;ss&quot;</div><div class="line"></div><div class="line">&gt;&gt;&gt; t = test(100)</div><div class="line">&gt;&gt;&gt; t</div><div class="line">&lt;__main__.test at 0x4db85f8&gt;</div><div class="line">&gt;&gt;&gt; str(t)</div><div class="line">&apos;ss&apos;</div><div class="line">&gt;&gt;&gt;print(t)</div><div class="line">ss</div><div class="line">&gt;&gt;&gt;repr(t)</div><div class="line">&lt;__main__.test at 0x4db85f8&gt;</div></pre></td></tr></table></figure>
-<p>可以看到在这里直接输入t还会跟上面的例子的结果一致，但是str（t）和print(t)已经发生了改变，不难看出显示的是我们在类中定义的<strong>str</strong>()函数的返回值，而rerp(t)还是 跟上个例子一样，下面我们也来实现一个<strong>str</strong>()函数来看一看效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class test(object):</div><div class="line">     def __init__(self, data):</div><div class="line">          self.data = data</div><div class="line">     def __str__(self):</div><div class="line">          return &quot;ss&quot;</div><div class="line">     def __repr__(self):</div><div class="line">          return &quot;gg&quot;</div><div class="line"></div><div class="line">&gt;&gt;&gt; t = test(100)</div><div class="line">&gt;&gt;&gt; t</div><div class="line">gg</div><div class="line">&gt;&gt;&gt; str(t)</div><div class="line">&apos;ss&apos;</div><div class="line">&gt;&gt;&gt;print(t)</div><div class="line">ss</div><div class="line">&gt;&gt;&gt;repr(t)</div><div class="line">&apos;gg&apos;</div><div class="line">&gt;&gt;&gt; print(repr(t))</div><div class="line">gg</div></pre></td></tr></table></figure>
-<p>好了，可以很清楚的明白，默认的<strong>str</strong>() <strong>repr</strong>()函数与重构后的区别，以及这两者与直接输入和经过print处理以后的关系了吧。<br>也就是直接在终端输入对象，相当于调用print（repr(oblect))函数，如果没有被复写则会出现上面最开始的那种显示形式；而print(object)函数相当于调用了print(str(object))这个函数，如果没有被复写就是使用的默认的，也会出现上面的显示结果。</p>
-<p>下面还有一个对于<strong>repr</strong>( )函数的说明：<br>Python中这个<em>repr</em>函数，对应repr(object)这个函数，返回一个可以用来表示对象的可打印字符串：</p>
-<blockquote>
-<p>1.尝试生成这样一个字符串，将其传给 eval()可重新生成同样的对象 ；<br>2.否则，生成用尖括号包住的字符串，包含类型名和额外的信息(比如地址) ；<br>3.一个类(class)可以通过 <strong>repr</strong>() 成员来控制repr()函数作用在其实例上时的行为。</p>
-</blockquote>
-<p>Python中，有的操作符和函数是做同样的事情，原因是某些场合下函数会比操作符更适合使用，比如函数对象可作为参数传递。</p>
-<p>希望我的文章能够帮到你，喜欢的可以点一波关注！！您的支持是博主坚持的动力~~~</p>
+  	<p><img src="about1.jpg" alt=""><br>1、交朋友的标准是什么？<br>答：出世的智者，入世的强者，或者正常而阳光的普通人。</p>
+<p>2、男性更看重女性的身材、脸蛋，还是思想？<br>答：脸蛋和身材决定了我是否想去了解她的思想，思想决定了我是否会一票否决掉她的脸蛋和身材。</p>
+<p>3、“别让孩子输在起跑线上”有道理吗？<br>答：一辈子都要和别人去比较，是人生悲剧的源头。</p>
+<p>4、做哪些事情可以提升生活品质？<br>答：定期扔东西。</p>
+<p>5、结婚以后两个人在一起最重要的是什么？<br>答：就当这婚还没结。</p>
+<p>6、怎么反驳“你行你上啊”的逻辑？<br>答：“我评论个电冰箱，自己还得会制冷啊？”</p>
+<p>7、把学费拿来念书还是环游世界更合适？为什么？<br>答：读书在没有充分的知识作为前提的情况下，即使行了万里路也不过是邮差而已。</p>
+<p>8、为什么部分人会产生“聪明智慧的姑娘都被憨憨的小伙儿搞定了”的印象？<br>答：严肃地说，我觉得，要么姑娘只是看起来聪明，要么小伙儿只是看起来憨……</p>
+<p>9、你心中的完美爱情是怎么样的？<br>答：可以有不完美。</p>
+<p>10、异国长期生活，改变了你的哪些“是非观”？<br>答：很多事情只是不同，并无是非。</p>
+<p>11、是不是一个人越成熟就越难爱上一个人？<br>答：不是越成熟越难爱上一个人。是越成熟，越能分辨那是不是爱。</p>
+<p>12、如何让这个世界变得美好？<br>答：把你自己变得更美好。</p>
+<p>13、苦难有什么价值？<br>答：永远不要相信苦难是值得的，苦难就是苦难，苦难不会带来成功。苦难不值得追求，磨练意志是因为苦难无法躲开。</p>
+<p>14、如何反驳“现实点，这个社会就是这样”？<br>答：“你是怎样，你的世界就是怎样。”</p>
+<p>15、你对自由的理解是什么？<br>答：说“不”的能力。</p>
+<p>16、怎么看待励志的书籍？<br>答：看再多，那都是别人的人生。</p>
+<p>17、同样是别人比自己强，为什么有时会产生嫉妒心理，而有时会产生崇拜？<br>答：远的崇拜，近的嫉妒；够不着的崇拜，够得着的嫉妒；有利益冲突的嫉妒，没利益冲突的崇拜。</p>
+<p>18、为什么当看到好照片时人们通常的反应是“真不错，你用的是什么相机”，当看到烂照片时，则往往笑话拍摄者水平很臭？<br>答：人习惯性地将自己的成功归因于自身，失败归因于环境；而将他人的成功归因于环境，失败归因于其自身。</p>
+<p>19、怎样在有效提出推荐或建议的同时，避免给人灌输和强迫的感觉？<br>答：说服他人不要诉诸理性，应求于利益。</p>
+<p>20、哪些技能，经较短时间的学习，就可以给人的生活带来巨大帮助？<br>答：夸奖他人。</p>
+<p>21、你是如何走出人生的阴霾的？<br>答：多走几步。</p>
+<p>22、二十六岁，工作三年却将留学三年，值得吗？<br>答：普通玩家选择标准配置，高端玩家选择自定义配置。</p>
+<p>23、如何看待“年轻时就释怀与淡泊，是没有希望的”这句话？<br>答：试图用一句话就来总结复杂的人生，是没有希望的。</p>
+<p>24、要怎样努力，才能成为很厉害的人？<br>答：如果你注定要成为厉害的人，那问题的答案就深藏在你的血脉里；如果你注定不是厉害的人，那你便只需要做好你自己。</p>
+<p>25、前半生与后半生的分界线是在哪里？<br>答：此时此刻。</p>
+<p>26、你遇到过哪些让你眼前一亮、醍醐灌顶或对你改变很大的理念？<br>答：天赋决定了你能达到的上限，努力程度决定了你能达到的下限。以绝大多数人的努力程度之低，远远没有达到要去拼天赋的地步。</p>
+<p>27、人这一生为什么要努力？<br>答：最痛苦的事，不是失败，是我本可以。</p>
+<p>28、在一个足够小的星球上行走，我们是在上坡还是下坡？<br>答：你感觉累就是上坡，感觉轻松就是下坡。</p>
+<p>29、听过最落寞的一句话或诗句是什么？<br>答：不如意事常八九，可与言者无二三。</p>
+<p>30、世界上有那么多好书好电影好动漫注定看不完，我们对这个事实该持何种态度？<br>答：怕什么真理无穷，进一寸有一寸的欢喜。——胡适</p>
+<p>31、三十岁才开始学习编程靠谱吗？<br>答：种一棵树最好的时间是十年前，其次是现在。</p>
+<p>32、向喜欢的女生表白被拒绝了，还是喜欢她，怎么办？<br>答：也许你弄错了什么是表白，表白应该是最终胜利时的号角，而不应该是发起进攻的冲锋号。</p>
+<p>33、省钱的好办法有哪些？<br>答：在买任何东西之前牢记九字箴言：你喜欢，你需要，你适合。PS：适用于很多事，包括感情也一样。</p>
+<p>34、王阳明的“知行合一”到底如何理解？又怎样运用到实际生活中？<br>答：知道做不到，等于不知道。</p>
+<p>35、什么叫见过大世面？<br>答：能享受最好的，能承受最坏的。</p>
+<p>36、科学和迷信的分界点是哪里？<br>答：我错了。</p>
+<p>37、扎克伯格初期是怎么保护 Facebook 的最初创意？为什么Facebook 上线后没被其他大公司抄走？<br>答：保护创意的最好方法，就是将其最好地执行。</p>
+<p>38、员工辞职最主要的原因是什么？<br>答：钱少事多离家远，位低权轻责任重。</p>
+<p>39、你在生活中得到过的最好的建议是什么？<br>答：“过度自我关注是万恶之源”、“永远不要为尚未发生的事儿拧巴”、“觉得为时已晚的时候，恰恰是最早的时候”。</p>
+<p>40、哪些行为是浪费时间？<br>答：思而不学+犹豫不决。</p>
+<p>41、最能燃起你学习激情的一句话是什么？<br>答：你不能把这个世界，让给你所鄙视的人。</p>
+<p>42、如果好人没好报，我们为什么还要做好人？<br>答：我们坚持一件事情，并不是因为这样做了会有效果，而是坚信，这样做是对的。——哈维尔</p>
+<p>43、恋爱半年，女朋友觉得没有了开始时的新鲜感，怎么办？<br>答：所谓新鲜感，不是和未知的人一起去做同样的事情，而是和已知的人一起去体验未知的人生。</p>
+<p>44、为什么大家都要上大学找工作，而不太喜欢开出租车、开小店、开饭馆、摆街边早餐小吃摊等“短平快”项目？<br>答：“孩子，我要求你读书用功，不是因为我要你跟别人比成绩，而是因为，我希望你将来会拥有选择的权利，选择有意义、有时间的工作，而不是被迫谋生。当你的工作在你心中有意义，你就有成就感。当你的工作给你时间，不剥夺你的生活，你就有尊严。成就感和尊严，给你快乐。”——龙应台</p>
+<p>45、情商不高的例子有哪些？<br>答：对陌生人毕恭毕敬，对亲近的人随意发怒……</p>
+<p>46、如何看待“年轻的时候需要的是朋友而不是人脉”？<br>答：没有目的之交往，才能感动人。</p>
+<p>47、有哪些道理是你读了不信，听不进去，直到你亲身经历方笃信不疑的？<br>答：不要低估你的能力，不要高估你的毅力。</p>
+<p>48、有哪些我们熟知的名言其实还有后半句？<br>答：“人是生而自由的”，下一句是：“但无往不在枷锁之中”，再下一句是：“自以为是其他一切主人的人，反而比其他一切更是奴隶。”</p>
  
 
     
@@ -143,16 +173,17 @@
 
     
 
-  	<a class="article-readmore" href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">阅读更多</a> 	
+  	<a class="article-readmore" href="/2017/11/30/那些让整个人都通透了的回复/">阅读更多</a> 	
 	
-</article> 
+</article>     
+      	
+    	
 
-	  	
+    
 
-  
-  
 </section>
-<script src="/js/category.js"></script> </section>
+
+</section>
 
                   
       
