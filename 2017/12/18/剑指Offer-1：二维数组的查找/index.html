@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  
+  
+  <title>  剑指Offer(一)：二维数组的查找 |   Zz-Krystal</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+        
+        
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
+        
+        <section id="post">
+        
+        
+
+         <article class="post">
+
+<div class="post-head">
+
+	<span class="post-title">	
+		剑指Offer(一)：二维数组的查找
+	</span>
+
+
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2017/12/18 15:53:37 	
+		</time>
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		1168
+		</span>
+
+
+		
+		
+
+<span class="post-visitor">
+		<span class="iconfont icon-eye"></span>
+		<span class="post-count" id="post-leancloud-count"></span>
+</span>
+
+<script src="//cdn1.lncld.net/static/js/3.3.0/av-min.js"></script>
+<script>
+var app_id = 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz';
+var app_key = 'oh9tizsnvV2vNvWgqEvoNtQO';
+AV.init({
+  appId: app_id,
+  appKey: app_key
+});
+</script>
+<script src="/js/leancloud.js"></script>
+
+ 	
+			
+		
+	</div>
+
+</div>
+ 
+
+
+  <div class="post-content slideDownMin">
+   
+    <p>摘要：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。<br><img src="/2017/12/18/剑指Offer-1：二维数组的查找/225H.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp; 由于博主最近接下来要准备找工作，所以接下来一系列的文章都是针对刷题笔记和查漏补缺的记录，这样可以以后忘记了很方便的查找，下面的文章主要是针对剑指Offer的刷题笔记。<br>刷题平台： <a href="https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&amp;tqId=11154&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网</a><br><a id="more"></a></p>
+<h3 id="二、题目"><a href="#二、题目" class="headerlink" title="二、题目"></a><strong>二、题目</strong></h3><p>&ensp;&ensp; 在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<h4 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a><strong>1、思路</strong></h4><p>&ensp;&ensp;两种思路，一种是：把每一行看成有序递增的数组，利用二分查找，通过遍历每一行找到答案，时间复杂度是nlogn。<br>&ensp;&ensp;另外一种是：每次将二维数组矩阵的中最右上角(或者左下角）的数字与要查找的数字比较，基于二维数组从左到右从上到下递增，那么当最右上角的数字大于目标数字就可以去掉该列，当最右边的数字小于目标数字的时候就去掉该行，如此遍历查找。</p>
+<h4 id="2、举例"><a href="#2、举例" class="headerlink" title="2、举例"></a><strong>2、举例</strong></h4><p>&ensp;&ensp; 如果在一个二维数组中找到数字7那么就返回True，否则返回False，这里我们只对第二种方法进行演示。<br><img src="/2017/12/18/剑指Offer-1：二维数组的查找/aa.png" alt=""><br>&ensp;&ensp; 查找过程如下：<br><img src="/2017/12/18/剑指Offer-1：二维数组的查找/bb.png" alt=""></p>
+<h4 id="3、具体实现"><a href="#3、具体实现" class="headerlink" title="3、具体实现"></a><strong>3、具体实现</strong></h4><p>&ensp;&ensp; C/C++:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">	boolean Find(vector&lt;vector&lt;int&gt; &gt; array, int target) &#123;</div><div class="line">        int rows = array.size();</div><div class="line">        int cols = array[0].size();</div><div class="line">		<span class="keyword">if</span>(!array.empty() &amp;&amp; rows &gt; <span class="number">0</span> &amp;&amp; cols &gt;<span class="number">0</span>)&#123;</div><div class="line">        	int row = 0;</div><div class="line">			int col = cols -1;</div><div class="line">			while(row &lt; rows &amp;&amp; col &gt;= <span class="number">0</span>)&#123;</div><div class="line">            	<span class="keyword">if</span>(target == array[row][col])</div><div class="line">                	return true;</div><div class="line">            	<span class="keyword">else</span> <span class="keyword">if</span>(target&gt;array[row][col])</div><div class="line">                	--col;</div><div class="line">            	<span class="keyword">else</span></div><div class="line">                	++row;</div><div class="line">        	&#125;</div><div class="line">		&#125;</div><div class="line">        return false;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+    
+
+  </div>  
+ 
+
+  <div class="post-bottom">
+		<div class="meta-info">
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-category"></li>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
+			</ul>
+			
+
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-tag"></li>
+				<a class="tag-link" href="/tags/数组，查找/">数组，查找</a>
+			</ul>
+			
+</div> 
+		
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+
+	<div class="-mob-share-list">
+
+		                  
+            <span class="iconfont icon-share-qq -mob-share-qq"></span>
+     	                  
+            <span class="iconfont icon-share-weixin -mob-share-weixin"></span>
+     	                  
+            <span class="iconfont icon-share-weibo -mob-share-weibo"></span>
+     	                  
+            <span class="iconfont icon-share-douban -mob-share-douban"></span>
+     	                  
+            <span class="iconfont icon-share-facebook -mob-share-facebook"></span>
+     	                  
+            <span class="iconfont icon-share-twitter -mob-share-twitter"></span>
+     	                  
+            <span class="iconfont icon-share-tumblr -mob-share-tumblr"></span>
+     	                  
+            <span class="iconfont icon-share-google -mob-share-google"></span>
+     	  
+	</div>    
+
+  </div>
+
+
+
+
+ <nav class="nav">
+
+  
+     
+      <div class="nav-prev">
+        <a class="nav-link" href="/2017/12/18/剑指Offer-2：替换空格/">  
+           <li class="li iconfont icon-left"></li>         
+              
+          <span class="nav-title">剑指Offer(二）：替换空格</span>
+        </a>
+      </div>
+    
+
+
+
+    
+       <div class="nav-next">      
+        <a  class="nav-link" href="/2017/11/30/那些让整个人都通透了的回复/">      
+
+             
+         <span class="nav-title">那些让整个人都通透了的回复</span>
+          <li class="li iconfont icon-right"></li>
+        </a>
+        </div>
+    
+
+</nav>   
+
+
+
+
+<div class="donate-btn iconfont icon-donate"></div>
+
+<div id="donate-box">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/wechatimg.jpg" alt="No donate img !">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/alipayimg.jpg" alt="No donate img !">				
+	</div>
+
+	<span class="donate-word slideDownMin">谢谢您请我吃糖果！</span>
+
+	<div class="donate-list fadeIn">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+
+
+
+
+<div id="comment"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+
+<script>
+    new Valine({
+    el: '#comment',
+    notify:false, 
+    verify:false, 
+    app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+    app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',  
+    path:window.location.pathname, 
+    avatar:'mm' ,
+    guest_info:['nick','mail']
+    });
+</script>
+
+
+
+
+
+<style type="text/css">
+#comment .wrap{
+    margin: 2px auto;
+}
+#comment input{
+    font-size: 16px;
+}
+</style>
+<script>
+//set the placeholder
+$(function(){
+    $('.vnick').attr('placeholder','昵称');
+    $('.veditor').attr('placeholder','说点什么吧...');
+    $('.vmail').attr('placeholder','邮箱');   
+})
+</script>
+
+
+
+	
+
+
+  
+
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-category" href="/categories">
+    分类</a>
+
+
+    <div class="small-tag">
+         
+          <a href="/categories/算法基础/">算法基础</a>     
+         
+          <a href="/categories/python学习/">python学习</a>     
+         
+          <a href="/categories/教程/">教程</a>     
+         
+          <a href="/categories/生活随想/">生活随想</a>     
+        
+    </div>
+
+  </div>
+
+  
+
+
+  
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+
+
+    <div class="small-tag">
+
+      <a href="/tags/Git-Github/" style="font-size: 13px;">Git,Github</a> <a href="/tags/python-str-repr/" style="font-size: 13px;">python,str,repr</a> <a href="/tags/字符串，查找，替换/" style="font-size: 13px;">字符串，查找，替换</a> <a href="/tags/数组，查找/" style="font-size: 13px;">数组，查找</a> <a href="/tags/树-重建/" style="font-size: 13px;">树,重建</a> <a href="/tags/生活，小情趣，大道理/" style="font-size: 13px;">生活，小情趣，大道理</a> <a href="/tags/链表，剑指Offer/" style="font-size: 13px;">链表，剑指Offer</a>
+
+    </div>
+  </div>
+
+  
+ 
+
+
+
+</article>
+
+
+<div id="toc" class="fadeIn">		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/post.js"></script>
+</section>
+
+     
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+
+	 2017
+	 Zz-Krystal	 
+
+	 </div>
+</footer> 
+    
+
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
+ga('send', 'pageview');
+
+</script>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
