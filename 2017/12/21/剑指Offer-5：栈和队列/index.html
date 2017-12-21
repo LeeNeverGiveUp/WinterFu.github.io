@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  那些年使用Git走过的坑 |   Zz-Krystal</title>
+  <title>  剑指Offer(五)：栈和队列 |   Zz-Krystal</title>
 
  
   
@@ -96,21 +96,21 @@
 <div class="post-head">
 
 	<span class="post-title">	
-		那些年使用Git走过的坑
+		剑指Offer(五)：栈和队列
 	</span>
 
 
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2017/11/28 21:43:31 	
+		2017/12/21 22:09:03 	
 		</time>
 
 
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		1194
+		1168
 		</span>
 
 
@@ -144,24 +144,23 @@ AV.init({
 
   <div class="post-content slideDownMin">
    
-    <p><img src="/2017/11/28/那些年使用Git走过的坑/about1.jpg" alt=""></p>
-<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
-<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。<br><a id="more"></a></p>
-<p>&ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。</p>
-<p>&ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
-<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
-<li>如何实现将本地代码部署到GitHub上？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. Github New Project 【ProjectName】（下称PN）</div><div class="line"><span class="number">2</span>. Copy PN的git地址</div><div class="line"><span class="number">3</span>. 切到本地终端，cd到Project下</div><div class="line"><span class="number">4</span>. git init</div><div class="line"><span class="number">5</span>. git remote add origin 【Copy的url】</div><div class="line"><span class="number">6</span>. git add .</div><div class="line"><span class="number">7</span>. git commit -m <span class="string">"Init Project"</span></div><div class="line"><span class="number">8</span>. git pull —rebase origin master（Github上New Project的时候如果初始化了READ.MD就要走这一步，否则不用；默认不会初始化的）</div><div class="line"><span class="number">9</span>. git push origin master</div></pre></td></tr></table></figure>
-<ol>
-<li>如何将别人GitHub上的工程下载下来然后自己修改后再上传上去？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. git clone URL 到本地</div><div class="line"><span class="number">2</span>. 修改了本地的<span class="selector-tag">a</span>.py文件</div><div class="line"><span class="number">3</span>. git add .</div><div class="line">4. git commit -m "update a.py"     # 是为了将改动提交到本地git</div><div class="line">5. git pull —rebase origin master   # 是为了拉远端代码到本地</div><div class="line">6. git push origin master               # 是为了推本地代码到远端</div><div class="line">注意第<span class="number">5</span>步，之所以要进行，是因为可能你改动<span class="selector-tag">a</span>.py的同时，我也改动了<span class="selector-tag">a</span>.py，然后我比你先推上去这个时候你如果不pull远端的代码就直接覆盖了。</div></pre></td></tr></table></figure>
-<ol>
-<li>如何回退到之前的版本，并实现远端和本地的回退？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span><span class="selector-class">.git</span> status</div><div class="line"><span class="number">2</span>. git pull —rebase origin master</div><div class="line"><span class="number">3</span>. git status</div><div class="line"><span class="number">4</span>. git log   #找出你要回退的commit ID  </div><div class="line"><span class="number">5</span>. <span class="selector-id">#git</span> reset —hard [上一步的commitID]  当然也可以使用 --hard HEAD^ 来逐个查询</div><div class="line"><span class="number">6</span>. git status   #执行完此步后可以看你的文件是不是返回到了修改之前</div><div class="line"><span class="number">7</span>. git push origin master -f     #如果不强推可以实现那就不用加 -f</div></pre></td></tr></table></figure>
-<p>更多重要的内容可以参照<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>，这样将有助于更好的了解Git的相关知识，让你更便捷的管理你的文件。</p>
+    <p>摘要：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。<br><img src="/2017/12/21/剑指Offer-5：栈和队列/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;剑指Offer的刷题笔记。<br>&ensp;&ensp;刷题平台：<a href="https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=13&amp;tqId=11158&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网</a><br><a id="more"></a></p>
+<h3 id="二、题目"><a href="#二、题目" class="headerlink" title="二、题目"></a><strong>二、题目</strong></h3><p>&ensp;&ensp;用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<h4 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a><strong>1、思路</strong></h4><p>&ensp;&ensp;这道题目首先要知道队列和栈各自的特点，那么接下来就按照这种特点去设计即可：</p>
+<ul>
+<li>入队：将元素进栈A</li>
+<li>出队：判断栈B是否为空，如果为空，则将栈A中所有的元素pop，并push进栈B，栈B出栈；如果不为空则栈B直接出栈。</li>
+</ul>
+<p>&ensp;&ensp;这里同样可以用两个队列实现一个栈的功能：</p>
+<ul>
+<li>入栈：将元素进队列A</li>
+<li>出栈：判断队列A中元素个数是否为1，如果等于1则出队列，否则将队列A中的元素，一次出队列并放入队列B中，直到队列A中的元素留下最后一个，然后队列A出队列，再把队列B中的元素出队列一次放入队列A中。</li>
+</ul>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; C/C++:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">class Solution</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    void push(int node) &#123;</div><div class="line">        stack1.push(node);</div><div class="line">    &#125;</div><div class="line">    int pop() &#123;</div><div class="line">        int temp;</div><div class="line">        <span class="keyword">if</span>(stack2.empty())&#123;</div><div class="line">            while(!stack1.empty())&#123;</div><div class="line">                temp = stack1.<span class="attribute">top</span>();</div><div class="line">                stack2.push(temp);</div><div class="line">                stack1.pop();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        temp = stack2.<span class="attribute">top</span>();</div><div class="line">        stack2.pop();</div><div class="line">        return temp;</div><div class="line">    &#125;</div><div class="line">private:</div><div class="line">    stack&lt;int&gt; stack1;</div><div class="line">    stack&lt;int&gt; stack2;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;人生苦短，我用Python:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line">class Solution:</div><div class="line">    def __init__(self):</div><div class="line">        self<span class="selector-class">.stackA</span> = [ ]</div><div class="line">        self<span class="selector-class">.stackB</span> = [ ]</div><div class="line">         </div><div class="line">    def push(self, node):</div><div class="line">        # write code here</div><div class="line">        self<span class="selector-class">.stackA</span><span class="selector-class">.append</span>(node)</div><div class="line">         </div><div class="line">    def pop(self):</div><div class="line">        # return xx</div><div class="line">        <span class="keyword">if</span> self<span class="selector-class">.stackB</span>:</div><div class="line">            return self<span class="selector-class">.stackB</span><span class="selector-class">.pop</span>()</div><div class="line">        elif not self<span class="selector-class">.stackA</span>:</div><div class="line">            return None</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            while self<span class="selector-class">.stackA</span>:</div><div class="line">                self<span class="selector-class">.stackB</span><span class="selector-class">.append</span>(self<span class="selector-class">.stackA</span><span class="selector-class">.pop</span>())</div><div class="line">            return self<span class="selector-class">.stackB</span><span class="selector-class">.pop</span>()</div></pre></td></tr></table></figure>
     
 
   </div>  
@@ -173,7 +172,7 @@ AV.init({
 	
 			<ul class="ul">
 				<li class="li iconfont icon-category"></li>
-				<a class="category-link" href="/categories/教程/">教程</a>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
 			</ul>
 			
 
@@ -181,7 +180,7 @@ AV.init({
 	
 			<ul class="ul">
 				<li class="li iconfont icon-tag"></li>
-				<a class="tag-link" href="/tags/Git-Github/">Git,Github</a>
+				<a class="tag-link" href="/tags/队列-栈/">队列,栈</a>
 			</ul>
 			
 </div> 
@@ -219,23 +218,15 @@ AV.init({
 
   
      
-      <div class="nav-prev">
-        <a class="nav-link" href="/2017/11/30/那些让整个人都通透了的回复/">  
-           <li class="li iconfont icon-left"></li>         
-              
-          <span class="nav-title">那些让整个人都通透了的回复</span>
-        </a>
-      </div>
-    
 
 
 
     
        <div class="nav-next">      
-        <a  class="nav-link" href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">      
+        <a  class="nav-link" href="/2017/12/21/全球AI挑战赛之场景分类赛后总结篇/">      
 
              
-         <span class="nav-title">Python中关于str（）函数和repr（）函数的那些事</span>
+         <span class="nav-title">全球AI挑战赛之场景分类赛后总结篇</span>
           <li class="li iconfont icon-right"></li>
         </a>
         </div>
