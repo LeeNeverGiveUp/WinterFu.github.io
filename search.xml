@@ -3,6 +3,85 @@
   
     
     <entry>
+      <title><![CDATA[剑指Offer 6：旋转数组的最小数字]]></title>
+      <url>/2017/12/25/%E5%89%91%E6%8C%87Offer-6%EF%BC%9A%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/</url>
+      <content type="html"><![CDATA[<p>摘要：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。<br><img src="/2017/12/25/剑指Offer-6：旋转数组的最小数字/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;剑指Offer的刷题笔记。<br>&ensp;&ensp;刷题平台：<a href="https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&amp;tqId=11159&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网</a><br><a id="more"></a></p>
+<h3 id="二、题目"><a href="#二、题目" class="headerlink" title="二、题目"></a><strong>二、题目</strong></h3><p>&ensp;&ensp;把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
+<h4 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a><strong>1、思路</strong></h4><p>&ensp;&ensp;首先要注意有无重复数字，也就是是否严格递增。这是一道二分查找的变形题目，旋转后的之后的数字实际上可以划分为两个有序的子数组：前面的数组中的元素大小都大于后面子数组中的元素。<br>&ensp;&ensp;不难发现实际上最小的元素就是两字子数组的分界线。本题目给出的数组一定程度上是排好序的，因此我们可以采用二分法来查找。</p>
+<ol>
+<li>我们用两个指针left,right分别指向数组的第一个元素和最后一个元素。按照题目的旋转的规则，第一个元素应该是大于最后一个元素的（没有重复的元素）。但是如果不旋转，第一个元素肯定是小于最后一个元素的。</li>
+<li>找到数组的中间元素：1&gt;中间元素大于第一个元素，则中间元素位于前面的递增子数组，此时最小元素位于中间元素的后面。我们可以让第一个指针left指向中间元素。移动之后，第一个指针仍然位于前面的递增数组中。 2&gt;中间元素小于第一个元素，则中间元素位于后面的递增子数组，此时最小元素位于中间元素的前面。我们可以让第二个指针right指向中间元素。移动后，第二个指针仍然位于后面的递增数组中。这样即可缩小寻找的范围。</li>
+<li>按照以上思路，第一个指针left总是指向前面递增数组的元素，第二个指针right总是指向后面递增的数组元素。最终第一个指针将指向前面数组的最后一个元素，第二个指针指向后面数组中的第一个元素。也就是说他们将指向两个相邻的元素，而第二个指针指向的刚好是最小的元素，这就是循环的结束条件。</li>
+</ol>
+<p>&ensp;&ensp;到目前为止以上思路很好的解决了没有重复数字的情况，这一道题目添加上了这一要求，有了重复数字。因此这一道题目比上一道题目多了些特殊情况：</p>
+<p>&ensp;&ensp;我们看一组例子：｛1，0，<font color="red">1</font>，<font color="green">1</font>，<font color="green">1</font>｝ 和 ｛<font color="purple">1</font>，<font color="purple">1</font>， <font color="red">1</font>，0，1｝ 都可以看成是递增排序数组｛0，1，1，1，1｝的旋转。</p>
+<p>&ensp;&ensp;这种情况下我们无法继续用上一道题目的解法，去解决这道题目。因为在这两个数组中，第一个数字，最后一个数字，中间数字都是1。第一种情况下，中间数字位于后面的子数组，第二种情况，中间数字位于前面的子数组。</p>
+<p>&ensp;&ensp;因此当两个指针指向的数字和中间数字相同的时候，我们无法确定中间数字1是属于前面的子数组（<font color="green">绿色表示</font>）还是属于后面的子数组（<font color="purple">紫色表示</font>）。也就无法移动指针来缩小查找范围了。</p>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; C/C++:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#include</span> &lt;iostream&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;vector&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;string&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;stack&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;algorithm&gt;</div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int minNumberInRotateArray(vector&lt;int&gt; rotateArray) &#123;</div><div class="line">        int size = rotateArray.size();</div><div class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        int <span class="attribute">left</span> = <span class="number">0</span>,right = size - <span class="number">1</span>;</div><div class="line">        int mid = 0;</div><div class="line">        while(rotateArray[<span class="attribute">left</span>] &gt;= rotateArray[right])&#123;</div><div class="line">            <span class="comment">// 分界点</span></div><div class="line">            <span class="keyword">if</span>(<span class="attribute">right</span> - left == <span class="number">1</span>)&#123;</div><div class="line">                mid = <span class="attribute">right</span>;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            mid = <span class="attribute">left</span> + (right - left) / <span class="number">2</span>;</div><div class="line">            <span class="comment">// rotateArray[left] rotateArray[right] rotateArray[mid]三者相等</span></div><div class="line">            <span class="comment">// 无法确定中间元素是属于前面还是后面的递增子数组</span></div><div class="line">            <span class="comment">// 只能顺序查找</span></div><div class="line">            <span class="keyword">if</span>(rotateArray[<span class="attribute">left</span>] == rotateArray[right] &amp;&amp; rotateArray[left] == rotateArray[mid])&#123;</div><div class="line">                return MinOrder(rotateArray,<span class="attribute">left</span>,right);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 中间元素位于前面的递增子数组</span></div><div class="line">            <span class="comment">// 此时最小元素位于中间元素的后面</span></div><div class="line">            <span class="keyword">if</span>(rotateArray[mid] &gt;= rotateArray[<span class="attribute">left</span>])&#123;</div><div class="line">                <span class="attribute">left</span> = mid;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 中间元素位于后面的递增子数组</span></div><div class="line">            <span class="comment">// 此时最小元素位于中间元素的前面</span></div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                <span class="attribute">right</span> = mid;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return rotateArray[mid];</div><div class="line">    &#125;</div><div class="line">private:</div><div class="line">    <span class="comment">// 顺序寻找最小值</span></div><div class="line">    int MinOrder(vector&lt;int&gt; &amp;num,int <span class="attribute">left</span>,int right)&#123;</div><div class="line">        int result = num[<span class="attribute">left</span>];</div><div class="line">        <span class="keyword">for</span>(int <span class="selector-tag">i</span> = <span class="attribute">left</span> + <span class="number">1</span>;<span class="selector-tag">i</span> &lt; <span class="attribute">right</span>;++i)&#123;</div><div class="line">            <span class="keyword">if</span>(num[i] &lt; result)&#123;</div><div class="line">                result = num[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">int main()&#123;</div><div class="line">    Solution s;</div><div class="line">    <span class="comment">//vector&lt;int&gt; num = &#123;0,1,2,3,4,5&#125;;</span></div><div class="line">    <span class="comment">//vector&lt;int&gt; num = &#123;4,5,6,7,1,2,3&#125;;</span></div><div class="line">    vector&lt;int&gt; num = &#123;2,2,2,2,1,2&#125;;</div><div class="line">    int result = s.minNumberInRotateArray(num);</div><div class="line">    <span class="comment">// 输出</span></div><div class="line">    cout&lt;&lt;result&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;人生苦短，我用Python:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf-8 -*-</div><div class="line">def find_rotation_array_min(roation_array):</div><div class="line">    n = len(roation_array)</div><div class="line">    <span class="keyword">if</span> roation_array[<span class="number">0</span>] &lt; roation_array[-<span class="number">1</span>]:</div><div class="line">        return <span class="number">0</span></div><div class="line">    <span class="attribute">left</span> = <span class="number">0</span></div><div class="line">    <span class="attribute">right</span> = n-<span class="number">1</span></div><div class="line">    while roation_array[<span class="attribute">left</span>] &gt;= roation_array[right]:</div><div class="line">        <span class="keyword">if</span> <span class="attribute">right</span>-left == <span class="number">1</span>:</div><div class="line">            mid = <span class="attribute">right</span></div><div class="line">            break</div><div class="line">        mid = <span class="attribute">left</span> + int((right - left) / <span class="number">2</span>)</div><div class="line">        <span class="keyword">if</span>(roation_array[<span class="attribute">left</span>]==roation_array[right] and roation_array[left] == roation_array[mid]):</div><div class="line">            return min(roation_array)</div><div class="line">        <span class="keyword">if</span>(roation_array[mid] &gt;= roation_array[<span class="attribute">left</span>]):</div><div class="line">            <span class="attribute">left</span> =mid</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="attribute">right</span>=mid</div><div class="line">    return roation_array[mid]</div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    s = [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>]</div><div class="line">    <span class="selector-tag">q</span> = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>]</div><div class="line">    print(find_rotation_array_min(s), find_rotation_array_min(q))</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 算法基础 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数组,查找,排序 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[浅谈神经网络中激励函数的作用]]></title>
+      <url>/2017/12/25/%E6%B5%85%E8%B0%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E6%BF%80%E5%8A%B1%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p><img src="/2017/12/25/浅谈神经网络中激励函数的作用/ff.jpg" alt=""></p>
+<h3 id="什么是激活函数？"><a href="#什么是激活函数？" class="headerlink" title="什么是激活函数？"></a><strong>什么是激活函数？</strong></h3><p>&ensp;&ensp;我想z这一点也不用多说，无论是搞机器学习还是深度学习的对于激活函数这个名词已经再熟悉不过了，因为搭建网络的时候都会要用到它，虽然我们无时无刻都在使用它，但是我们真的知其然也知其所以然么？</p>
+<ul>
+<li>首先问自己一个问题，在解决复杂问题用的神经网络模型中如果没有激活函数可以么？</li>
+<li>很显然，不可以！！！</li>
+</ul>
+<p>&ensp;&ensp;那么肯定又会有人问了为什么不可以，那有无激活函数又有什么区别，激活函数的作用又是什么呢？</p>
+<a id="more"></a>
+<p>&ensp;&ensp;且听我慢慢道来：<br>&ensp;&ensp;首先回答，为什么不可以，神经网络之所以很强大，能够解决很多复杂问题，很重要的一点就是其引入了非线性，那么是通过什么引入的呢？没错就是你想的那样，通过激活函数，这样它才能够解决一些复杂的非线性问题，如果没有激活函数，或者是线性激活函数，那么就跟普通的线性方程别无二致了，这肯定不是我们想要的。</p>
+<h3 id="激活函数的作用"><a href="#激活函数的作用" class="headerlink" title="激活函数的作用"></a><strong>激活函数的作用</strong></h3><ul>
+<li>激活函数是用来加入非线性因素的，解决线性模型所不能解决的问题</li>
+<li>激活函数可以用来组合训练数据的特征，使特征充分组合</li>
+</ul>
+<p>&ensp;&ensp;在这里第一个特点上面我们也提到了，主要是用来引入非线性，提高神经网络的表达能力，更好的解决复杂的非线性问题。单层感知机解决不了异或问题，多层感知机可以解决异或但是再加入一点非线性其能力还是很弱，这已经是个老生常谈的话题了。</p>
+<p>&ensp;&ensp;下面主要从第二个特点我们进行说明一下：</p>
+<p>&ensp;&ensp;首先我们看一个简单的感知机的例子：<br><img src="/2017/12/25/浅谈神经网络中激励函数的作用/dd.png" alt=""></p>
+<p>&ensp;&ensp;其中，x1和x2为特征输入，x3 = w1 <em> x1 + w2 </em> x2，激活函数采用sigmoid函数，公式表达式如下：<br><img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large g(x)=\frac{1}{1+e^{-x}}" style="border:none;"></p>
+<p>则<img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large g(x3)=\frac{1} {1 + e^{-x3}}" style="border:none;"></p>
+<p>&ensp;&ensp;此时，我们可能看不出什么不同，下面我们进行泰勒展开，</p>
+<p><img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large e^x=1 + \frac{1} {1!}x + \frac{1} {2!} x^2 + \frac{1} {3!} x^3 + o(x^3)" style="border:none;"></p>
+<p>&ensp;&ensp;通过泰勒展开。我们不难看到，我们已经构造出立方激活函数的形式了，我们能够看到，将x3带入到激活函数中时，将激活函数中的指数项按照泰勒级数展开后，就会有平方项，立方项，有更高的项，这些能够把输入特征进行亮亮组合，进行三三组合或者其他组合。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>&ensp;&ensp;激活函数在神经网络模型的构建中必不可少，能够引入一定的非线性因素，增强网络的表达能力；此外还可以把原来需要领域知识的专家对特征进行组合的情况，在激活函数运算后，其实也能够起到特征组合的作用。（只要激活函数中能有用泰勒级数展开的函数，就可以对特征起到组合的作用）</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 激活函数,sigmoid </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[剑指Offer(五)：栈和队列]]></title>
       <url>/2017/12/21/%E5%89%91%E6%8C%87Offer-5%EF%BC%9A%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</url>
       <content type="html"><![CDATA[<p>摘要：用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。<br><img src="/2017/12/21/剑指Offer-5：栈和队列/ppo.jpg" alt=""></p>

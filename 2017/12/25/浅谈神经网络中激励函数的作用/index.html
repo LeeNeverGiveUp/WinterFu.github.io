@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  那些年使用Git走过的坑 |   Zz-Krystal</title>
+  <title>  浅谈神经网络中激励函数的作用 |   Zz-Krystal</title>
 
  
   
@@ -96,21 +96,21 @@
 <div class="post-head">
 
 	<span class="post-title">	
-		那些年使用Git走过的坑
+		浅谈神经网络中激励函数的作用
 	</span>
 
 
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2017/11/28 21:43:31 	
+		2017/12/25 19:30:25 	
 		</time>
 
 
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		1194
+		1037
 		</span>
 
 
@@ -144,24 +144,28 @@ AV.init({
 
   <div class="post-content slideDownMin">
    
-    <p><img src="/2017/11/28/那些年使用Git走过的坑/about1.jpg" alt=""></p>
-<h2 id="Git介绍"><a href="#Git介绍" class="headerlink" title="Git介绍"></a>Git介绍</h2><p>&ensp;&ensp;Git是一种世界上最先进的分布式版本管理系统（没有之一），特点就是高端、大气上档次。那么什么是版本控制呢，通俗一点说就是可以记录你对文件每一次改动的都进行记录。<br>&ensp;&ensp;下面就来介绍一下Git的工作流程：</p>
-<p>&ensp;&ensp;可以看到主要分为工作区和版本库两大部分，其中工作区也就是我们本地的文件夹，版本库也就是Git的内部存储，也可以看作是电脑的硬盘。<br><a id="more"></a></p>
-<p>&ensp;&ensp;可以看到，工作流程就是在工作区进行文件的修改，然后使用 git add 实现将修改推送到暂存区，但是这并不会被推送到版本库内。</p>
-<p>&ensp;&ensp;最终需要通过 git commit 命令来对之前在暂存区内的更改，提交到版本库，然后就可以进行版本库到远端的传输。</p>
-<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><ol>
-<li>如何实现将本地代码部署到GitHub上？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. Github New Project 【ProjectName】（下称PN）</div><div class="line"><span class="number">2</span>. Copy PN的git地址</div><div class="line"><span class="number">3</span>. 切到本地终端，cd到Project下</div><div class="line"><span class="number">4</span>. git init</div><div class="line"><span class="number">5</span>. git remote add origin 【Copy的url】</div><div class="line"><span class="number">6</span>. git add .</div><div class="line"><span class="number">7</span>. git commit -m <span class="string">"Init Project"</span></div><div class="line"><span class="number">8</span>. git pull —rebase origin master（Github上New Project的时候如果初始化了READ.MD就要走这一步，否则不用；默认不会初始化的）</div><div class="line"><span class="number">9</span>. git push origin master</div></pre></td></tr></table></figure>
-<ol>
-<li>如何将别人GitHub上的工程下载下来然后自己修改后再上传上去？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. git clone URL 到本地</div><div class="line"><span class="number">2</span>. 修改了本地的<span class="selector-tag">a</span>.py文件</div><div class="line"><span class="number">3</span>. git add .</div><div class="line">4. git commit -m "update a.py"     # 是为了将改动提交到本地git</div><div class="line">5. git pull —rebase origin master   # 是为了拉远端代码到本地</div><div class="line">6. git push origin master               # 是为了推本地代码到远端</div><div class="line">注意第<span class="number">5</span>步，之所以要进行，是因为可能你改动<span class="selector-tag">a</span>.py的同时，我也改动了<span class="selector-tag">a</span>.py，然后我比你先推上去这个时候你如果不pull远端的代码就直接覆盖了。</div></pre></td></tr></table></figure>
-<ol>
-<li>如何回退到之前的版本，并实现远端和本地的回退？</li>
-</ol>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span><span class="selector-class">.git</span> status</div><div class="line"><span class="number">2</span>. git pull —rebase origin master</div><div class="line"><span class="number">3</span>. git status</div><div class="line"><span class="number">4</span>. git log   #找出你要回退的commit ID  </div><div class="line"><span class="number">5</span>. <span class="selector-id">#git</span> reset —hard [上一步的commitID]  当然也可以使用 --hard HEAD^ 来逐个查询</div><div class="line"><span class="number">6</span>. git status   #执行完此步后可以看你的文件是不是返回到了修改之前</div><div class="line"><span class="number">7</span>. git push origin master -f     #如果不强推可以实现那就不用加 -f</div></pre></td></tr></table></figure>
-<p>更多重要的内容可以参照<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>，这样将有助于更好的了解Git的相关知识，让你更便捷的管理你的文件。</p>
+    <p><img src="/2017/12/25/浅谈神经网络中激励函数的作用/ff.jpg" alt=""></p>
+<h3 id="什么是激活函数？"><a href="#什么是激活函数？" class="headerlink" title="什么是激活函数？"></a><strong>什么是激活函数？</strong></h3><p>&ensp;&ensp;我想z这一点也不用多说，无论是搞机器学习还是深度学习的对于激活函数这个名词已经再熟悉不过了，因为搭建网络的时候都会要用到它，虽然我们无时无刻都在使用它，但是我们真的知其然也知其所以然么？</p>
+<ul>
+<li>首先问自己一个问题，在解决复杂问题用的神经网络模型中如果没有激活函数可以么？</li>
+<li>很显然，不可以！！！</li>
+</ul>
+<p>&ensp;&ensp;那么肯定又会有人问了为什么不可以，那有无激活函数又有什么区别，激活函数的作用又是什么呢？</p>
+<a id="more"></a>
+<p>&ensp;&ensp;且听我慢慢道来：<br>&ensp;&ensp;首先回答，为什么不可以，神经网络之所以很强大，能够解决很多复杂问题，很重要的一点就是其引入了非线性，那么是通过什么引入的呢？没错就是你想的那样，通过激活函数，这样它才能够解决一些复杂的非线性问题，如果没有激活函数，或者是线性激活函数，那么就跟普通的线性方程别无二致了，这肯定不是我们想要的。</p>
+<h3 id="激活函数的作用"><a href="#激活函数的作用" class="headerlink" title="激活函数的作用"></a><strong>激活函数的作用</strong></h3><ul>
+<li>激活函数是用来加入非线性因素的，解决线性模型所不能解决的问题</li>
+<li>激活函数可以用来组合训练数据的特征，使特征充分组合</li>
+</ul>
+<p>&ensp;&ensp;在这里第一个特点上面我们也提到了，主要是用来引入非线性，提高神经网络的表达能力，更好的解决复杂的非线性问题。单层感知机解决不了异或问题，多层感知机可以解决异或但是再加入一点非线性其能力还是很弱，这已经是个老生常谈的话题了。</p>
+<p>&ensp;&ensp;下面主要从第二个特点我们进行说明一下：</p>
+<p>&ensp;&ensp;首先我们看一个简单的感知机的例子：<br><img src="/2017/12/25/浅谈神经网络中激励函数的作用/dd.png" alt=""></p>
+<p>&ensp;&ensp;其中，x1和x2为特征输入，x3 = w1 <em> x1 + w2 </em> x2，激活函数采用sigmoid函数，公式表达式如下：<br><img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large g(x)=\frac{1}{1+e^{-x}}" style="border:none;"></p>
+<p>则<img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large g(x3)=\frac{1} {1 + e^{-x3}}" style="border:none;"></p>
+<p>&ensp;&ensp;此时，我们可能看不出什么不同，下面我们进行泰勒展开，</p>
+<p><img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large e^x=1 + \frac{1} {1!}x + \frac{1} {2!} x^2 + \frac{1} {3!} x^3 + o(x^3)" style="border:none;"></p>
+<p>&ensp;&ensp;通过泰勒展开。我们不难看到，我们已经构造出立方激活函数的形式了，我们能够看到，将x3带入到激活函数中时，将激活函数中的指数项按照泰勒级数展开后，就会有平方项，立方项，有更高的项，这些能够把输入特征进行亮亮组合，进行三三组合或者其他组合。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>&ensp;&ensp;激活函数在神经网络模型的构建中必不可少，能够引入一定的非线性因素，增强网络的表达能力；此外还可以把原来需要领域知识的专家对特征进行组合的情况，在激活函数运算后，其实也能够起到特征组合的作用。（只要激活函数中能有用泰勒级数展开的函数，就可以对特征起到组合的作用）</p>
     
 
   </div>  
@@ -173,7 +177,7 @@ AV.init({
 	
 			<ul class="ul">
 				<li class="li iconfont icon-category"></li>
-				<a class="category-link" href="/categories/教程/">教程</a>
+				<a class="category-link" href="/categories/机器学习/">机器学习</a>
 			</ul>
 			
 
@@ -181,7 +185,7 @@ AV.init({
 	
 			<ul class="ul">
 				<li class="li iconfont icon-tag"></li>
-				<a class="tag-link" href="/tags/Git-Github/">Git,Github</a>
+				<a class="tag-link" href="/tags/激活函数-sigmoid/">激活函数,sigmoid</a>
 			</ul>
 			
 </div> 
@@ -220,10 +224,10 @@ AV.init({
   
      
       <div class="nav-prev">
-        <a class="nav-link" href="/2017/11/30/那些让整个人都通透了的回复/">  
+        <a class="nav-link" href="/2017/12/25/剑指Offer-6：旋转数组的最小数字/">  
            <li class="li iconfont icon-left"></li>         
               
-          <span class="nav-title">那些让整个人都通透了的回复</span>
+          <span class="nav-title">剑指Offer 6：旋转数组的最小数字</span>
         </a>
       </div>
     
@@ -232,10 +236,10 @@ AV.init({
 
     
        <div class="nav-next">      
-        <a  class="nav-link" href="/2017/11/28/Python中关于str（）函数和repr（）函数的那些事/">      
+        <a  class="nav-link" href="/2017/12/21/剑指Offer-5：栈和队列/">      
 
              
-         <span class="nav-title">Python中关于str（）函数和repr（）函数的那些事</span>
+         <span class="nav-title">剑指Offer(五)：栈和队列</span>
           <li class="li iconfont icon-right"></li>
         </a>
         </div>
