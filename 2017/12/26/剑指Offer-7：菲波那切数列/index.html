@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  
+  
+  <title>  剑指Offer(七)：斐波那切数列 |   Zz-Krystal</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+        
+        
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
+        
+        <section id="post">
+        
+        
+
+         <article class="post">
+
+<div class="post-head">
+
+	<span class="post-title">	
+		剑指Offer(七)：斐波那切数列
+	</span>
+
+
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2017/12/26 21:36:12 	
+		</time>
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2042
+		</span>
+
+
+		
+		
+
+<span class="post-visitor">
+		<span class="iconfont icon-eye"></span>
+		<span class="post-count" id="post-leancloud-count"></span>
+</span>
+
+<script src="//cdn1.lncld.net/static/js/3.3.0/av-min.js"></script>
+<script>
+var app_id = 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz';
+var app_key = 'oh9tizsnvV2vNvWgqEvoNtQO';
+AV.init({
+  appId: app_id,
+  appKey: app_key
+});
+</script>
+<script src="/js/leancloud.js"></script>
+
+ 	
+			
+		
+	</div>
+
+</div>
+ 
+
+
+  <div class="post-content slideDownMin">
+   
+    <p>摘要：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。<br><img src="/2017/12/26/剑指Offer-7：菲波那切数列/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;剑指Offer的刷题笔记。<br>&ensp;&ensp;刷题平台：<a href="https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&amp;tqId=11160&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网</a><br><a id="more"></a></p>
+<h3 id="二、题目"><a href="#二、题目" class="headerlink" title="二、题目"></a><strong>二、题目</strong></h3><p>&ensp;&ensp;大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。</p>
+<h4 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a><strong>1、思路</strong></h4><p>&ensp;&ensp;斐波那切数列，相信大家都不陌生吧，对就是那个我们小时候常做的问题，什么小兔子生兔子的问题，还有一些花的花瓣数也是符合斐波那契数列的规律的，因此也称其为“迷人的斐波那契数列”，在数学上，斐波那契数列以递归的方式定义：F(0) = 0，F(1) = 1， F(n) = F(n-1) + F(n-2) (n&gt;=2，n为正整数)</p>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; C/C++:<br>1.首先我们就可以按照其定义方式，用递归的思想来实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int Fibonacci(int n) &#123;</div><div class="line">        if(n&lt;=0) return 0;</div><div class="line"> if(n==1 || n==2) return 1;</div><div class="line">        return Fibonacci(n-1)+Fibonacci(n-2);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这里存在一个问题就是，当n比较大的时候会出现溢出的情况。</p>
+<p>2.动态规划的思想</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int Fibonacci(int n) &#123;</div><div class="line">        int f = 0, g = 1;</div><div class="line">        while(n--) &#123;</div><div class="line">            g += f;</div><div class="line">            f = g - f;</div><div class="line">        &#125;</div><div class="line">        return f;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>3.全面考虑，把负数，大数，算法的复杂度，空间浪费都考虑进来</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int Fibonacci(int n) &#123;</div><div class="line">        <span class="comment">//方法1：用递归，系统会让一个超大的n来让Stack Overflow，所以</span></div><div class="line">        <span class="comment">//递归就不考虑了</span></div><div class="line">         </div><div class="line">        <span class="comment">//使用迭代法，用fn1和fn2保存计算过程中的结果，并复用起来</span></div><div class="line">        int fn1 = 1;</div><div class="line">        int fn2 = 1;</div><div class="line">         </div><div class="line">        <span class="comment">//考虑出错情况</span></div><div class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//第一和第二个数直接返回</span></div><div class="line">        if (n == 1 || n == 2) &#123;</div><div class="line">            return 1;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="comment">//当n&gt;=3时，走这里，用迭代法算出结果</span></div><div class="line">        <span class="comment">//这里也说明了，要用三个数操作的情况，其实也可以简化为两</span></div><div class="line">        <span class="comment">//个数，从而节省内存空间</span></div><div class="line">        while (n-- &gt; <span class="number">2</span>) &#123;</div><div class="line">            fn1 += fn2;</div><div class="line">            fn2 = fn1 - fn2;</div><div class="line">        &#125;</div><div class="line">        return fn1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4.尾递归，递归总归来说是栈，可能导致栈溢出</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public int Fibonacci(int n) &#123;</div><div class="line">        return Fibonacci(n,0,1);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">     </div><div class="line">    private static int Fibonacci(int n,int acc1,int acc2)&#123;</div><div class="line">        if(n==0) return 0;</div><div class="line">        if(n==1) return acc2;</div><div class="line">        else     return Fibonacci(n - 1, acc2, acc1 + acc2);</div><div class="line">         </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;人生苦短，我用Python:<br>1.递归实现</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def fib(n):</div><div class="line">    return <span class="number">1</span> <span class="keyword">if</span> n&lt;=<span class="number">1</span> <span class="keyword">else</span> fib(n-<span class="number">1</span>)+fib(n-<span class="number">2</span>)              #很简单的一个三目运算符实现</div><div class="line"></div><div class="line">def fib(n):</div><div class="line">    dic = &#123; <span class="number">0</span>:<span class="number">1</span>, <span class="number">1</span>: <span class="number">1</span>&#125;</div><div class="line">    <span class="keyword">if</span> n&lt;=<span class="number">1</span>:</div><div class="line">        return dict[n]</div><div class="line">    retrun fib(n-<span class="number">1</span>)+fib(n-<span class="number">2</span>)</div></pre></td></tr></table></figure>
+<p>PS：递归还有一个缺点就是需要进行很多次重复的运算</p>
+<p>2.完美实现方案1</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def fib1(n):</div><div class="line">    stack =[]</div><div class="line">    <span class="keyword">if</span> n==<span class="number">0</span> or n==<span class="number">1</span>:</div><div class="line">       return <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        stack.append(<span class="number">1</span>)</div><div class="line">        stack.append(<span class="number">1</span>)</div><div class="line">        <span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(<span class="number">2</span>,n):</div><div class="line">            stack.append(stack[i-<span class="number">1</span>] + stack[i-<span class="number">2</span>])</div><div class="line">        retrun stack</div></pre></td></tr></table></figure>
+<p>3.完美实现方案2</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">def fib2(number):</div><div class="line">    x, y = <span class="number">0</span>, <span class="number">1</span></div><div class="line">    result = []</div><div class="line">    while y &lt; number:</div><div class="line">        result.append(y)</div><div class="line">        x, y = y, x+y</div><div class="line">    return result</div></pre></td></tr></table></figure>
+<p>4.完美实现方案3，吧其编程一个生成器的形式，可以使用循环将其输出出来</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def fib3():</div><div class="line">    x, y = <span class="number">0</span>, <span class="number">1</span></div><div class="line">    while True:</div><div class="line">        yeild x</div><div class="line">        x, y = y, x+y</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    import itertools</div><div class="line">    print(list(itertools.islice(fib(), <span class="number">10</span>))</div></pre></td></tr></table></figure>
+    
+
+  </div>  
+ 
+
+  <div class="post-bottom">
+		<div class="meta-info">
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-category"></li>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
+			</ul>
+			
+
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-tag"></li>
+				<a class="tag-link" href="/tags/递归-循环/">递归,循环</a>
+			</ul>
+			
+</div> 
+		
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+
+	<div class="-mob-share-list">
+
+		                  
+            <span class="iconfont icon-share-qq -mob-share-qq"></span>
+     	                  
+            <span class="iconfont icon-share-weixin -mob-share-weixin"></span>
+     	                  
+            <span class="iconfont icon-share-weibo -mob-share-weibo"></span>
+     	                  
+            <span class="iconfont icon-share-douban -mob-share-douban"></span>
+     	                  
+            <span class="iconfont icon-share-facebook -mob-share-facebook"></span>
+     	                  
+            <span class="iconfont icon-share-twitter -mob-share-twitter"></span>
+     	                  
+            <span class="iconfont icon-share-tumblr -mob-share-tumblr"></span>
+     	                  
+            <span class="iconfont icon-share-google -mob-share-google"></span>
+     	  
+	</div>    
+
+  </div>
+
+
+
+
+ <nav class="nav">
+
+  
+     
+
+
+
+    
+       <div class="nav-next">      
+        <a  class="nav-link" href="/2017/12/25/剑指Offer-6：旋转数组的最小数字/">      
+
+             
+         <span class="nav-title">剑指Offer(六)：旋转数组的最小数字</span>
+          <li class="li iconfont icon-right"></li>
+        </a>
+        </div>
+    
+
+</nav>   
+
+
+
+
+<div class="donate-btn iconfont icon-donate"></div>
+
+<div id="donate-box">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/wechatimg.jpg" alt="No donate img !">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/alipayimg.jpg" alt="No donate img !">				
+	</div>
+
+	<span class="donate-word slideDownMin">谢谢您请我吃糖果！</span>
+
+	<div class="donate-list fadeIn">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+
+
+
+
+<div id="comment"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+
+<script>
+    new Valine({
+    el: '#comment',
+    notify:false, 
+    verify:false, 
+    app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+    app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',  
+    path:window.location.pathname, 
+    avatar:'mm' ,
+    guest_info:['nick','mail']
+    });
+</script>
+
+
+
+
+
+<style type="text/css">
+#comment .wrap{
+    margin: 2px auto;
+}
+#comment input{
+    font-size: 16px;
+}
+</style>
+<script>
+//set the placeholder
+$(function(){
+    $('.vnick').attr('placeholder','昵称');
+    $('.veditor').attr('placeholder','说点什么吧...');
+    $('.vmail').attr('placeholder','邮箱');   
+})
+</script>
+
+
+
+	
+
+
+  
+
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-category" href="/categories">
+    分类</a>
+
+
+    <div class="small-tag">
+         
+          <a href="/categories/python学习/">python学习</a>     
+         
+          <a href="/categories/算法基础/">算法基础</a>     
+         
+          <a href="/categories/机器学习/">机器学习</a>     
+         
+          <a href="/categories/教程/">教程</a>     
+         
+          <a href="/categories/Events/">Events</a>     
+         
+          <a href="/categories/生活随想/">生活随想</a>     
+        
+    </div>
+
+  </div>
+
+  
+
+
+  
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+
+
+    <div class="small-tag">
+
+      <a href="/tags/AI-场景识别-Keras/" style="font-size: 13px;">AI,场景识别,Keras</a> <a href="/tags/Git-Github/" style="font-size: 13px;">Git,Github</a> <a href="/tags/python-str-repr/" style="font-size: 13px;">python,str,repr</a> <a href="/tags/字符串，查找，替换/" style="font-size: 13px;">字符串，查找，替换</a> <a href="/tags/数组-查找-排序/" style="font-size: 13px;">数组,查找,排序</a> <a href="/tags/数组，查找/" style="font-size: 13px;">数组，查找</a> <a href="/tags/树-重建/" style="font-size: 13px;">树,重建</a> <a href="/tags/激活函数-sigmoid/" style="font-size: 13px;">激活函数,sigmoid</a> <a href="/tags/生活，小情趣，大道理/" style="font-size: 13px;">生活，小情趣，大道理</a> <a href="/tags/递归-循环/" style="font-size: 13px;">递归,循环</a> <a href="/tags/链表，剑指Offer/" style="font-size: 13px;">链表，剑指Offer</a> <a href="/tags/队列-栈/" style="font-size: 13px;">队列,栈</a>
+
+    </div>
+  </div>
+
+  
+ 
+
+
+
+</article>
+
+
+<div id="toc" class="fadeIn">		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/post.js"></script>
+</section>
+
+     
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+
+	 2017
+	 Zz-Krystal	 
+
+	 </div>
+</footer> 
+    
+
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
+ga('send', 'pageview');
+
+</script>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
