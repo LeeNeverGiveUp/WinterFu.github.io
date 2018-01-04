@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  
+  
+  <title>  排序(一)：冒泡排序 |   Zz-Krystal</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+        
+        
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
+        
+        <section id="post">
+        
+        
+
+         <article class="post">
+
+<div class="post-head">
+
+	<span class="post-title">	
+		排序(一)：冒泡排序
+	</span>
+
+
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/01/04 09:15:47 	
+		</time>
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		1947
+		</span>
+
+
+		
+		
+
+<span class="post-visitor">
+		<span class="iconfont icon-eye"></span>
+		<span class="post-count" id="post-leancloud-count"></span>
+</span>
+
+<script src="//cdn1.lncld.net/static/js/3.3.0/av-min.js"></script>
+<script>
+var app_id = 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz';
+var app_key = 'oh9tizsnvV2vNvWgqEvoNtQO';
+AV.init({
+  appId: app_id,
+  appKey: app_key
+});
+</script>
+<script src="/js/leancloud.js"></script>
+
+ 	
+			
+		
+	</div>
+
+</div>
+ 
+
+
+  <div class="post-content slideDownMin">
+   
+    <p>摘要：冒泡排序是一种交换排序。什么是交换排序呢？答曰：两两比较待排序的关键字，并交换不满足次序要求的那对数，直到整个表都满足次序要求为止。<br><img src="/2018/01/04/排序1：冒泡排序/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;冒泡排序是一种简单的排序算法，也是一种<strong>交换排序</strong>。<br>&ensp;&ensp;所谓交换排序就是不断地进行两两比较，满足条件则交换，不满足不交换。<br><a id="more"></a></p>
+<h3 id="二、算法思想"><a href="#二、算法思想" class="headerlink" title="二、算法思想"></a><strong>二、算法思想</strong></h3><p>&ensp;&ensp;它会遍历若干次要排序的数列，每次遍历时，它都会从前往后依次的比较相邻两个数的大小；如果前者比后者大，则交换它们的位置。这样，一次遍历之后，最大的元素就在数列的末尾！ 采用相同的方法再次遍历时，第二大的元素就被排列在最大元素之前。重复此操作，直到整个数列都有序为止！</p>
+<h4 id="1、算法图解"><a href="#1、算法图解" class="headerlink" title="1、算法图解"></a><strong>1、算法图解</strong></h4><p>&ensp;&ensp;下面以数列{20,40,30,10,60,50}为例，演示它的冒泡排序过程(如下图)。<br><img src="/2018/01/04/排序1：冒泡排序/f1.png" alt=""><br>&ensp;&ensp;我们首先分析<strong>第一趟</strong>排序：<br><img src="/2018/01/04/排序1：冒泡排序/f2.png" alt=""></p>
+<p>第一趟排完之后，最大元素60移到数组最后了，也就是a[5]此时为数组中最大的元素，再进行第二趟排序的时候，只需按照上面的方法排前面5个元素就可以了。这样：<br>第2趟排序完之后，数列中a[4]、a[5]是有序的。<br>第3趟排序完之后，数列中a[3]、a[4]、a[5]是有序的。<br>第4趟排序完之后，数列中a[2]、[3]、a[4]、a[5]是有序的。<br>第5趟排序完之后，数列中a[1]、a[2]、[3]、a[4]、a[5]是有序的。<br>第5趟排序之后，整个数列也就是有序的了。</p>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; 根据上面的流程，不难写出冒泡排序的实现，首先我们用C/C++实现，此处是按<strong>升序</strong>排序:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">void bubble_sort(int <span class="selector-tag">a</span>[], int n)</div><div class="line">&#123;</div><div class="line">    int i,j;</div><div class="line"></div><div class="line">    for (i=n-1; i&gt;0; i--)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 将a[0...i]中最大的数据放在末尾</span></div><div class="line">        for (j=0; j&lt;i; j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="selector-tag">a</span>[j] &gt; <span class="selector-tag">a</span>[j+<span class="number">1</span>])</div><div class="line">            swap(a[j], a[j+1]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void swap(int x, int y)</div><div class="line">&#123;</div><div class="line">	int temp;</div><div class="line">	temp = x;</div><div class="line">	x = y;</div><div class="line">	y = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp; 其实观察上面例子冒泡排序的流程图，第3趟排序之后，数据已经是有序的了；第4趟和第5趟并没有进行数据交换。因此可以对冒泡排序进行<strong>优化</strong>，使它效率更高一些：添加一个标记，如果一趟遍历中发生了交换，则标记为true，否则为false。如果某一趟没有发生交换，说明排序已经完成，退出。<strong>优化后</strong>的代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">void bubble_sort2(int <span class="selector-tag">a</span>[], int n)</div><div class="line">&#123;</div><div class="line">    int i,j;</div><div class="line">    int flag;     // 标记一趟是否发生交换</div><div class="line">    for (i=n-1; i&gt;0; i--)</div><div class="line">    &#123;</div><div class="line">        flag = 0;     // 初始化标记为0</div><div class="line">        <span class="comment">// 将a[0...i]中最大的数据放在末尾</span></div><div class="line">        for (j=0; j&lt;i; j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="selector-tag">a</span>[j] &gt; <span class="selector-tag">a</span>[j+<span class="number">1</span>])</div><div class="line">            &#123;</div><div class="line">                swap(a[j], a[j+1]);</div><div class="line">                flag = 1; //发生交换，设flag为1</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (flag==<span class="number">0</span>)</div><div class="line">            break; // 若无交换，说明数列已有序</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&ensp;&ensp;人生苦短，我用Python:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line"> </div><div class="line">def bubbleSort(input_list):</div><div class="line">	<span class="keyword">if</span> len(input_list)</div><div class="line">def bubble_sort(lists):</div><div class="line">	# 冒泡排序</div><div class="line">	<span class="keyword">if</span> len(lists) == <span class="number">0</span>:</div><div class="line">		return []</div><div class="line">	count = len(lists)</div><div class="line">	</div><div class="line">	<span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(count):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="selector-tag">i</span> + <span class="number">1</span>, count):</div><div class="line">			<span class="keyword">if</span> lists[i] &gt; lists[j]:</div><div class="line">				lists[i], lists[j] = lists[j], lists[i]</div><div class="line">				</div><div class="line">		return lists</div></pre></td></tr></table></figure>
+<h3 id="三、时间复杂度及算法稳定性分析"><a href="#三、时间复杂度及算法稳定性分析" class="headerlink" title="三、时间复杂度及算法稳定性分析"></a><strong>三、时间复杂度及算法稳定性分析</strong></h3><p>&ensp;&ensp;冒泡排序的时间复杂度是O(N2)：假设被排序的数列中有N个数。遍历一趟的时间复杂度是O(N)，需要遍历多少次呢？N-1次！因此，冒泡排序的时间复杂度O(N2)。</p>
+<p>&ensp;&ensp;冒泡排序是稳定的算法：它满足稳定算法的定义；所谓算法稳定性指的是对于一个数列中的两个相等的数a[i]=a[j]，在排序前,a[i]在a[j]前面，经过排序后a[i]仍然在a[j]前，那么这个排序算法是稳定的。</p>
+    
+
+  </div>  
+ 
+
+  <div class="post-bottom">
+		<div class="meta-info">
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-category"></li>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
+			</ul>
+			
+
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-tag"></li>
+				<a class="tag-link" href="/tags/排序-冒泡/">排序,冒泡</a>
+			</ul>
+			
+</div> 
+		
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+
+	<div class="-mob-share-list">
+
+		                  
+            <span class="iconfont icon-share-qq -mob-share-qq"></span>
+     	                  
+            <span class="iconfont icon-share-weixin -mob-share-weixin"></span>
+     	                  
+            <span class="iconfont icon-share-weibo -mob-share-weibo"></span>
+     	                  
+            <span class="iconfont icon-share-douban -mob-share-douban"></span>
+     	                  
+            <span class="iconfont icon-share-facebook -mob-share-facebook"></span>
+     	                  
+            <span class="iconfont icon-share-twitter -mob-share-twitter"></span>
+     	                  
+            <span class="iconfont icon-share-tumblr -mob-share-tumblr"></span>
+     	                  
+            <span class="iconfont icon-share-google -mob-share-google"></span>
+     	  
+	</div>    
+
+  </div>
+
+
+
+
+ <nav class="nav">
+
+  
+     
+      <div class="nav-prev">
+        <a class="nav-link" href="/2018/01/04/排序2：快速排序/">  
+           <li class="li iconfont icon-left"></li>         
+              
+          <span class="nav-title">排序(二）：快速排序</span>
+        </a>
+      </div>
+    
+
+
+
+    
+       <div class="nav-next">      
+        <a  class="nav-link" href="/2017/12/26/剑指Offer-7：菲波那切数列/">      
+
+             
+         <span class="nav-title">剑指Offer(七)：斐波那切数列</span>
+          <li class="li iconfont icon-right"></li>
+        </a>
+        </div>
+    
+
+</nav>   
+
+
+
+
+<div class="donate-btn iconfont icon-donate"></div>
+
+<div id="donate-box">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/wechatimg.jpg" alt="No donate img !">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/alipayimg.jpg" alt="No donate img !">				
+	</div>
+
+	<span class="donate-word slideDownMin">谢谢您请我吃糖果！</span>
+
+	<div class="donate-list fadeIn">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+
+
+
+
+<div id="comment"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+
+<script>
+    new Valine({
+    el: '#comment',
+    notify:false, 
+    verify:false, 
+    app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+    app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',  
+    path:window.location.pathname, 
+    avatar:'mm' ,
+    guest_info:['nick','mail']
+    });
+</script>
+
+
+
+
+
+<style type="text/css">
+#comment .wrap{
+    margin: 2px auto;
+}
+#comment input{
+    font-size: 16px;
+}
+</style>
+<script>
+//set the placeholder
+$(function(){
+    $('.vnick').attr('placeholder','昵称');
+    $('.veditor').attr('placeholder','说点什么吧...');
+    $('.vmail').attr('placeholder','邮箱');   
+})
+</script>
+
+
+
+	
+
+
+  
+
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-category" href="/categories">
+    分类</a>
+
+
+    <div class="small-tag">
+         
+          <a href="/categories/python学习/">python学习</a>     
+         
+          <a href="/categories/Events/">Events</a>     
+         
+          <a href="/categories/算法基础/">算法基础</a>     
+         
+          <a href="/categories/机器学习/">机器学习</a>     
+         
+          <a href="/categories/教程/">教程</a>     
+         
+          <a href="/categories/生活随想/">生活随想</a>     
+        
+    </div>
+
+  </div>
+
+  
+
+
+  
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+
+
+    <div class="small-tag">
+
+      <a href="/tags/AI-场景识别-Keras/" style="font-size: 13px;">AI,场景识别,Keras</a> <a href="/tags/Git-Github/" style="font-size: 13px;">Git,Github</a> <a href="/tags/python-str-repr/" style="font-size: 13px;">python,str,repr</a> <a href="/tags/字符串，查找，替换/" style="font-size: 13px;">字符串，查找，替换</a> <a href="/tags/排序-冒泡/" style="font-size: 13px;">排序,冒泡</a> <a href="/tags/排序-快排/" style="font-size: 13px;">排序,快排</a> <a href="/tags/排序-插入/" style="font-size: 13px;">排序,插入</a> <a href="/tags/排序-选择/" style="font-size: 13px;">排序,选择</a> <a href="/tags/数组-查找-排序/" style="font-size: 13px;">数组,查找,排序</a> <a href="/tags/数组，查找/" style="font-size: 13px;">数组，查找</a> <a href="/tags/树-重建/" style="font-size: 13px;">树,重建</a> <a href="/tags/激活函数-sigmoid/" style="font-size: 13px;">激活函数,sigmoid</a> <a href="/tags/生活，小情趣，大道理/" style="font-size: 13px;">生活，小情趣，大道理</a> <a href="/tags/递归-循环/" style="font-size: 13px;">递归,循环</a> <a href="/tags/链表，剑指Offer/" style="font-size: 13px;">链表，剑指Offer</a> <a href="/tags/队列-栈/" style="font-size: 13px;">队列,栈</a>
+
+    </div>
+  </div>
+
+  
+ 
+
+
+
+</article>
+
+
+<div id="toc" class="fadeIn">		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/post.js"></script>
+</section>
+
+     
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+	 	2017-
+	 
+
+	 2018
+	 Zz-Krystal	 
+
+	 </div>
+</footer> 
+    
+
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
+ga('send', 'pageview');
+
+</script>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
