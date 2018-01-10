@@ -3,6 +3,49 @@
   
     
     <entry>
+      <title><![CDATA[剑指offer（八）：斐波那契数列的拓展]]></title>
+      <url>/2018/01/10/%E5%89%91%E6%8C%87offer-8%EF%BC%9A%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E6%8B%93%E5%B1%95/</url>
+      <content type="html"><![CDATA[<p>摘要：前面我们已经提到很多问题都可看作是斐波那契数列的应用，这也是面试官经常考察的，如何将一个问题抽象成已有知识可以解答的问题的能力。<br><img src="/2018/01/10/剑指offer-8：斐波那契数列的拓展/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp; 不少面试题都可以看成是斐波那契数列的应用，下面我们就来介绍一个实际的应用和解题思路。<br>刷题平台： <a href="https://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=13&amp;tqId=11161&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网-跳台阶</a>，<a href="https://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&amp;tqId=11162&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网-变态跳台阶</a>，<a href="%E7%89%9B%E5%AE%A2%E7%BD%91-%E7%9F%A9%E5%BD%A2%E8%A6%86%E7%9B%96">牛客网-矩形覆盖</a><br><a id="more"></a></p>
+<h3 id="二、题目"><a href="#二、题目" class="headerlink" title="二、题目"></a><strong>二、题目</strong></h3><ul>
+<li>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</li>
+<li>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</li>
+<li>我们可以用2x1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2x1的小矩形无重叠地覆盖一个2xn的大矩形，总共有多少种方法？</li>
+</ul>
+<h4 id="1、思路"><a href="#1、思路" class="headerlink" title="1、思路"></a><strong>1、思路</strong></h4><p>&ensp;&ensp;我们分别对于以上三道题目进行分析，给出解题思路。</p>
+<ol>
+<li>首先，对于第一道跳台阶的问题，首先我们考虑最简单的情况，只有一级台阶，显然只有一种跳法。如果有两级台阶，那就有两种：一种是分两次跳，每次跳一级；另一种是一次跳两级。更一般的情况，当有n级台阶（n&gt;2)的时候，第一次跳就有两种不同的选择：一是一次跳一级，此时跳法数目等于后面剩下的n-1级台阶的跳法数目，我们用f(n-1)表示；另外一种选择是一次跳两级，此时跳法数目等于后面剩下的n-2级台阶的跳法数目，也就是f(n-2)。因此n级台阶的不同跳法的总数f(n)=f(n-1)+f(n-2)，很显然斐波那契数列嘛！！</li>
+</ol>
+<p><img src="/2018/01/10/剑指offer-8：斐波那契数列的拓展/f1.jpg" alt=""></p>
+<ol>
+<li>这道题目我们可以看出与上一题目的改变就是，青蛙的会的跳法数和台阶数是一致的，但是这不完全是斐波那契数列，下面我们来分析一下：</li>
+</ol>
+<p>&ensp;&ensp;（1）假定第一次跳的是一阶，那么剩下的是n-1个台阶，跳法是f(n-1)；假定第一次跳的是2阶，那么剩下的是n-2个台阶，跳法是f(n-2)；假定第一次跳的是3阶，那么剩下的是n-3个台阶，跳法是f(n-3)……假定第一次跳的是n-1阶，那么剩下的是1个台阶，跳法是f(1)； 假定第一次跳的是n阶，那么剩下的是0个台阶，跳法是1种；<br>&ensp;&ensp;（2）总跳法为: f(n) = 1+f(n-1) + f(n-2)+….+f(1)  （第一个1是跳n阶只有一种方法）<br>&ensp;&ensp;（3）根据（2）可以得出有一阶的时候 f(1) = 1 ；有两阶的时候可以有 f(2) = 1+f(1)=2；有三阶的时候可以有 f(3) = 1+f(2)+f(1)=4…依次内推，有n阶时f(n)=2^(n-1)。</p>
+<p>&ensp;&ensp;很容易就可以归纳出来这里结论，更简单的来想一下：每个台阶都有跳与不跳两种情况（除了最后一个台阶），最后一个台阶必须跳。所以共用2^(n-1)中情况。</p>
+<p>&ensp;&ensp;归纳出来了表达式，可以看出这是一个乘方形式，而且还是2的乘方，为什么是2的乘方我们那么开心呢？哦原来我们平时一直在用的计算机不就是二进制形式工作的吗，那我们还用循环或者递归实现么，显然拒绝时间开销，拒绝递归调用，位运算给我们提供了很好帮助，一行代码搞定：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return  1&lt;&lt;--number;</div></pre></td></tr></table></figure>
+<ol>
+<li>下面来分析第三个问题，这个填充的问题应该很多同学小学的时候没少做这样的问题吧，但是当时我们并没有深入去了解这个问题，也没有总结这个题目背后的规律。我们把2<em>8的覆盖方法记为f(8)。用2</em>1的小矩形去覆盖大矩形时，很显然两种方法：横着、竖着。当竖着放时，右边还剩下2<em>7的区域，如下图所示，这种情况下覆盖方法记为f(7)。接下来考虑横着放的情况，当放在左上角时，左下角必须也放一个横着的小矩形，那么剩下2</em>6的区域，这种情况下的覆盖方法记为f(6)，因此f(8) = f(7)+f(6)，看又熟悉了吧，斐波那契数列啊！！！<br><img src="/2018/01/10/剑指offer-8：斐波那契数列的拓展/f2.png" alt=""></li>
+</ol>
+<h3 id="三-、总结"><a href="#三-、总结" class="headerlink" title="三 、总结"></a><strong>三 、总结</strong></h3><p>&ensp;&ensp;通过这几道题目的分析，我们可以得出一个结论：那就是要活学活用自己学到的知识，要学会举一反三，如何分析问题并将其抽象成我们已经掌握的知识可解决的问题，这种能力才是我们今后学习的过程中要不断提高加强的！！！</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 算法基础 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 递归,循环 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[排序（四）：选择排序]]></title>
       <url>/2018/01/04/%E6%8E%92%E5%BA%8F4%EF%BC%9A%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
       <content type="html"><![CDATA[<p>摘要：选择排序（Selection Sort)是一种最简单直接的排序算法。<br><img src="/2018/01/04/排序4：选择排序/ppo.jpg" alt=""></p>
@@ -152,7 +195,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[剑指Offer(七)：斐波那切数列]]></title>
+      <title><![CDATA[剑指Offer(七)：斐波那契数列]]></title>
       <url>/2017/12/26/%E5%89%91%E6%8C%87Offer-7%EF%BC%9A%E8%8F%B2%E6%B3%A2%E9%82%A3%E5%88%87%E6%95%B0%E5%88%97/</url>
       <content type="html"><![CDATA[<p>摘要：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。<br><img src="/2017/12/26/剑指Offer-7：菲波那切数列/ppo.jpg" alt=""></p>
 <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;剑指Offer的刷题笔记。<br>&ensp;&ensp;刷题平台：<a href="https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&amp;tqId=11160&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">牛客网</a><br><a id="more"></a></p>
