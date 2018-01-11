@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://winterfu.github.io/"/>
-  <updated>2018-01-10T11:14:01.701Z</updated>
+  <updated>2018-01-11T02:43:29.339Z</updated>
   <id>http://winterfu.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通俗理解字符串匹配算法KMP</title>
+    <link href="http://winterfu.github.io/2018/01/11/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/"/>
+    <id>http://winterfu.github.io/2018/01/11/字符串匹配/</id>
+    <published>2018-01-11T01:41:24.000Z</published>
+    <updated>2018-01-11T02:43:29.339Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要：字符串和数组是两种最基本的数据结构，都是用连续内存分别存储字符和数字，数组常用来查找，字符串常见的问题以字符串匹配最为常见。<br><img src="/2018/01/11/字符串匹配/ppoi.jpg" alt=""></p><h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp; 字符串匹配是计算机的基本任务之一。举例来说，有一个字符串”BBC ABCDAB ABCDABCDABDE”，那我们想知道，里面是否包含另一个字符串”ABCDABD”？</p><p>&ensp;&ensp;关于字符串匹配的算法也有很多，但是最有名最常用的是Knuth-Morris-Pratt算法（简称KMP），其命名规则是按照三个发明人的名字命名的，开头的那个K，没错！就是那个老头，著名的科学家Donald Knuth。<br><a id="more"></a></p><h3 id="二、算法详解"><a href="#二、算法详解" class="headerlink" title="二、算法详解"></a><strong>二、算法详解</strong></h3><p>&ensp;&ensp;这种算法不太容易理解，相信很多同学看这个算法的时候都是一头雾水，什么“部分匹配”，“移位”什么的都是怎么计算移动的，没关系，接下来我们就通俗的讲解一下这个算法。</p><h4 id="1、部分匹配表"><a href="#1、部分匹配表" class="headerlink" title="1、部分匹配表"></a><strong>1、部分匹配表</strong></h4><p>&ensp;&ensp;我们首先来介绍一个概念“部分匹配表”，顾名思义就是部分上能够匹配上的字符记录表格。那么这个表示怎么产生的呢？那我们就要理解一下什么是“前缀”和“后缀”的概念。”前缀”指除了最后一个字符以外，一个字符串的全部头部组合；”后缀”指除了第一个字符以外，一个字符串的全部尾部组合。<br><img src="/2018/01/11/字符串匹配/f00.jpg" alt=""><br>&ensp;&ensp;”部分匹配值”就是”前缀”和”后缀”的最长的共有元素的长度。以”ABCDABD”为例：<br><img src="/2018/01/11/字符串匹配/f01.jpg" alt=""><br>&ensp;&ensp;”部分匹配”的实质是，有时候，字符串头部和尾部会有重复。比如，”ABCDAB”之中有两个”AB”，那么它的”部分匹配值”就是2（”AB”的长度）。搜索词移动的时候，第一个”AB”向后移动4位（字符串长度-部分匹配值），就可以来到第二个”AB”的位置。</p><h4 id="2、实例详解"><a href="#2、实例详解" class="headerlink" title="2、实例详解"></a><strong>2、实例详解</strong></h4><p>&ensp;&ensp;我们要在字符串<font color="red">“BBC ABCDAB ABCDABCDABDE”</font>中判断是否包含字符串<font color="red">“ABCDABD”</font>。我们将ABCDABD称之为<font color="red">搜索词</font>。<br><img src="/2018/01/11/字符串匹配/f1.jpg" alt=""><br>&ensp;&ensp;第一步：字符串”BBC ABCDAB ABCDABCDABDE”的第一个字符与搜索词”ABCDABD”的第一个字符，进行比较。因为B与A不匹配，所以搜索词后移一位。<br><img src="/2018/01/11/字符串匹配/f2.jpg" alt=""><br>&ensp;&ensp;第二步：因为B与A不匹配，搜索词再往后移。就这样，直到字符串有一个字符，与搜索词的第一个字符相同为止。<br><img src="/2018/01/11/字符串匹配/f3.jpg" alt=""><br>&ensp;&ensp;第三步：接着比较字符串和搜索词的下一个字符，还是相同。<br><img src="/2018/01/11/字符串匹配/f4.jpg" alt=""><br>&ensp;&ensp;第四步：接着往下比较，直到字符串有一个字符，与搜索词对应的字符不相同为止。<br><img src="/2018/01/11/字符串匹配/f5.jpg" alt=""><br>&ensp;&ensp;第五步：这时，最自然的反应是，将搜索词整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把”搜索位置”移到已经比较过的位置，重比一遍。<br><img src="/2018/01/11/字符串匹配/f6.jpg" alt=""><br>&ensp;&ensp;第六步：一个基本事实是，当空格与D不匹配时，你其实知道前面六个字符是”ABCDAB”。KMP算法的想法是，设法利用这个已知信息，不要把”搜索位置”移回已经比较过的位置，继续把它向后移，这样就提高了效率。<br><img src="/2018/01/11/字符串匹配/f7.jpg" alt=""><br>&ensp;&ensp;第七步：怎么做到这一点呢？可以针对搜索词，算出一张《部分匹配表》（Partial Match Table）。这张表是如何产生的，后面再介绍，这里只要会用就可以了。<br><img src="/2018/01/11/字符串匹配/f8.jpg" alt=""><br>&ensp;&ensp;第八步：已知空格与D不匹配时，前面六个字符”ABCDAB”是匹配的。查表可知，最后一个匹配字符B对应的”部分匹配值”为2，因此按照下面的公式算出向后移动的位数：</p><p><font color="red">移动位数 = 已匹配的字符数 - 对应的部分匹配值</font><br>计算可以得出搜索词应该向后移动6 - 2 = 4位。<br><img src="/2018/01/11/字符串匹配/f9.jpg" alt=""><br>&ensp;&ensp;第九步：因为空格与Ｃ不匹配，搜索词还要继续往后移。这时，已匹配的字符数为2（”AB”），对应的”部分匹配值”为0。所以，移动位数 = 2 - 0，结果为 2，于是将搜索词向后移2位。<br><img src="/2018/01/11/字符串匹配/f10.jpg" alt=""><br>&ensp;&ensp;第十步：因为空格与A不匹配，继续后移一位。<br><img src="/2018/01/11/字符串匹配/f11.jpg" alt=""><br>&ensp;&ensp;第十一步：逐位比较，直到发现C与D不匹配。于是，移动位数 = 6 - 2，继续将搜索词向后移动4位。<br><img src="/2018/01/11/字符串匹配/f12.jpg" alt=""><br>&ensp;&ensp;逐位比较，直到搜索词的最后一位，发现完全匹配，于是搜索完成。如果还要继续搜索（即找出全部匹配），移动位数 = 7 - 0，再将搜索词向后移动7位，这里就不再重复了。</p><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h4><p>&ensp;&ensp;<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要：字符串和数组是两种最基本的数据结构，都是用连续内存分别存储字符和数字，数组常用来查找，字符串常见的问题以字符串匹配最为常见。&lt;br&gt;&lt;img src=&quot;/2018/01/11/字符串匹配/ppoi.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;&lt;strong&gt;一、前言&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&amp;ensp;&amp;ensp; 字符串匹配是计算机的基本任务之一。举例来说，有一个字符串”BBC ABCDAB ABCDABCDABDE”，那我们想知道，里面是否包含另一个字符串”ABCDABD”？&lt;/p&gt;
+&lt;p&gt;&amp;ensp;&amp;ensp;关于字符串匹配的算法也有很多，但是最有名最常用的是Knuth-Morris-Pratt算法（简称KMP），其命名规则是按照三个发明人的名字命名的，开头的那个K，没错！就是那个老头，著名的科学家Donald Knuth。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法基础" scheme="http://winterfu.github.io/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="字符串,查找,匹配" scheme="http://winterfu.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%9F%A5%E6%89%BE-%E5%8C%B9%E9%85%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指offer（八）：斐波那契数列的拓展</title>

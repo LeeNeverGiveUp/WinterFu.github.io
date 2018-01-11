@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  
+  
+  <title>  通俗理解字符串匹配算法KMP |   Zz-Krystal</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+        
+        
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
+        
+        <section id="post">
+        
+        
+
+         <article class="post">
+
+<div class="post-head">
+
+	<span class="post-title">	
+		通俗理解字符串匹配算法KMP
+	</span>
+
+
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/01/11 09:41:24 	
+		</time>
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		1873
+		</span>
+
+
+		
+		
+
+<span class="post-visitor">
+		<span class="iconfont icon-eye"></span>
+		<span class="post-count" id="post-leancloud-count"></span>
+</span>
+
+<script src="//cdn1.lncld.net/static/js/3.3.0/av-min.js"></script>
+<script>
+var app_id = 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz';
+var app_key = 'oh9tizsnvV2vNvWgqEvoNtQO';
+AV.init({
+  appId: app_id,
+  appKey: app_key
+});
+</script>
+<script src="/js/leancloud.js"></script>
+
+ 	
+			
+		
+	</div>
+
+</div>
+ 
+
+
+  <div class="post-content slideDownMin">
+   
+    <p>摘要：字符串和数组是两种最基本的数据结构，都是用连续内存分别存储字符和数字，数组常用来查找，字符串常见的问题以字符串匹配最为常见。<br><img src="/2018/01/11/字符串匹配/ppoi.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp; 字符串匹配是计算机的基本任务之一。举例来说，有一个字符串”BBC ABCDAB ABCDABCDABDE”，那我们想知道，里面是否包含另一个字符串”ABCDABD”？</p>
+<p>&ensp;&ensp;关于字符串匹配的算法也有很多，但是最有名最常用的是Knuth-Morris-Pratt算法（简称KMP），其命名规则是按照三个发明人的名字命名的，开头的那个K，没错！就是那个老头，著名的科学家Donald Knuth。<br><a id="more"></a></p>
+<h3 id="二、算法详解"><a href="#二、算法详解" class="headerlink" title="二、算法详解"></a><strong>二、算法详解</strong></h3><p>&ensp;&ensp;这种算法不太容易理解，相信很多同学看这个算法的时候都是一头雾水，什么“部分匹配”，“移位”什么的都是怎么计算移动的，没关系，接下来我们就通俗的讲解一下这个算法。</p>
+<h4 id="1、部分匹配表"><a href="#1、部分匹配表" class="headerlink" title="1、部分匹配表"></a><strong>1、部分匹配表</strong></h4><p>&ensp;&ensp;我们首先来介绍一个概念“部分匹配表”，顾名思义就是部分上能够匹配上的字符记录表格。那么这个表示怎么产生的呢？那我们就要理解一下什么是“前缀”和“后缀”的概念。”前缀”指除了最后一个字符以外，一个字符串的全部头部组合；”后缀”指除了第一个字符以外，一个字符串的全部尾部组合。<br><img src="/2018/01/11/字符串匹配/f00.jpg" alt=""><br>&ensp;&ensp;”部分匹配值”就是”前缀”和”后缀”的最长的共有元素的长度。以”ABCDABD”为例：<br><img src="/2018/01/11/字符串匹配/f01.jpg" alt=""><br>&ensp;&ensp;”部分匹配”的实质是，有时候，字符串头部和尾部会有重复。比如，”ABCDAB”之中有两个”AB”，那么它的”部分匹配值”就是2（”AB”的长度）。搜索词移动的时候，第一个”AB”向后移动4位（字符串长度-部分匹配值），就可以来到第二个”AB”的位置。</p>
+<h4 id="2、实例详解"><a href="#2、实例详解" class="headerlink" title="2、实例详解"></a><strong>2、实例详解</strong></h4><p>&ensp;&ensp;我们要在字符串<font color="red">“BBC ABCDAB ABCDABCDABDE”</font>中判断是否包含字符串<font color="red">“ABCDABD”</font>。我们将ABCDABD称之为<font color="red">搜索词</font>。<br><img src="/2018/01/11/字符串匹配/f1.jpg" alt=""><br>&ensp;&ensp;第一步：字符串”BBC ABCDAB ABCDABCDABDE”的第一个字符与搜索词”ABCDABD”的第一个字符，进行比较。因为B与A不匹配，所以搜索词后移一位。<br><img src="/2018/01/11/字符串匹配/f2.jpg" alt=""><br>&ensp;&ensp;第二步：因为B与A不匹配，搜索词再往后移。就这样，直到字符串有一个字符，与搜索词的第一个字符相同为止。<br><img src="/2018/01/11/字符串匹配/f3.jpg" alt=""><br>&ensp;&ensp;第三步：接着比较字符串和搜索词的下一个字符，还是相同。<br><img src="/2018/01/11/字符串匹配/f4.jpg" alt=""><br>&ensp;&ensp;第四步：接着往下比较，直到字符串有一个字符，与搜索词对应的字符不相同为止。<br><img src="/2018/01/11/字符串匹配/f5.jpg" alt=""><br>&ensp;&ensp;第五步：这时，最自然的反应是，将搜索词整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把”搜索位置”移到已经比较过的位置，重比一遍。<br><img src="/2018/01/11/字符串匹配/f6.jpg" alt=""><br>&ensp;&ensp;第六步：一个基本事实是，当空格与D不匹配时，你其实知道前面六个字符是”ABCDAB”。KMP算法的想法是，设法利用这个已知信息，不要把”搜索位置”移回已经比较过的位置，继续把它向后移，这样就提高了效率。<br><img src="/2018/01/11/字符串匹配/f7.jpg" alt=""><br>&ensp;&ensp;第七步：怎么做到这一点呢？可以针对搜索词，算出一张《部分匹配表》（Partial Match Table）。这张表是如何产生的，后面再介绍，这里只要会用就可以了。<br><img src="/2018/01/11/字符串匹配/f8.jpg" alt=""><br>&ensp;&ensp;第八步：已知空格与D不匹配时，前面六个字符”ABCDAB”是匹配的。查表可知，最后一个匹配字符B对应的”部分匹配值”为2，因此按照下面的公式算出向后移动的位数：</p>
+<p><font color="red">移动位数 = 已匹配的字符数 - 对应的部分匹配值</font><br>计算可以得出搜索词应该向后移动6 - 2 = 4位。<br><img src="/2018/01/11/字符串匹配/f9.jpg" alt=""><br>&ensp;&ensp;第九步：因为空格与Ｃ不匹配，搜索词还要继续往后移。这时，已匹配的字符数为2（”AB”），对应的”部分匹配值”为0。所以，移动位数 = 2 - 0，结果为 2，于是将搜索词向后移2位。<br><img src="/2018/01/11/字符串匹配/f10.jpg" alt=""><br>&ensp;&ensp;第十步：因为空格与A不匹配，继续后移一位。<br><img src="/2018/01/11/字符串匹配/f11.jpg" alt=""><br>&ensp;&ensp;第十一步：逐位比较，直到发现C与D不匹配。于是，移动位数 = 6 - 2，继续将搜索词向后移动4位。<br><img src="/2018/01/11/字符串匹配/f12.jpg" alt=""><br>&ensp;&ensp;逐位比较，直到搜索词的最后一位，发现完全匹配，于是搜索完成。如果还要继续搜索（即找出全部匹配），移动位数 = 7 - 0，再将搜索词向后移动7位，这里就不再重复了。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h4><p>&ensp;&ensp;<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</a></p>
+    
+
+  </div>  
+ 
+
+  <div class="post-bottom">
+		<div class="meta-info">
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-category"></li>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
+			</ul>
+			
+
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-tag"></li>
+				<a class="tag-link" href="/tags/字符串-查找-匹配/">字符串,查找,匹配</a>
+			</ul>
+			
+</div> 
+		
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+
+	<div class="-mob-share-list">
+
+		                  
+            <span class="iconfont icon-share-qq -mob-share-qq"></span>
+     	                  
+            <span class="iconfont icon-share-weixin -mob-share-weixin"></span>
+     	                  
+            <span class="iconfont icon-share-weibo -mob-share-weibo"></span>
+     	                  
+            <span class="iconfont icon-share-douban -mob-share-douban"></span>
+     	                  
+            <span class="iconfont icon-share-facebook -mob-share-facebook"></span>
+     	                  
+            <span class="iconfont icon-share-twitter -mob-share-twitter"></span>
+     	                  
+            <span class="iconfont icon-share-tumblr -mob-share-tumblr"></span>
+     	                  
+            <span class="iconfont icon-share-google -mob-share-google"></span>
+     	  
+	</div>    
+
+  </div>
+
+
+
+
+ <nav class="nav">
+
+  
+     
+
+
+
+    
+       <div class="nav-next">      
+        <a  class="nav-link" href="/2018/01/10/剑指offer-8：斐波那契数列的拓展/">      
+
+             
+         <span class="nav-title">剑指offer（八）：斐波那契数列的拓展</span>
+          <li class="li iconfont icon-right"></li>
+        </a>
+        </div>
+    
+
+</nav>   
+
+
+
+
+<div class="donate-btn iconfont icon-donate"></div>
+
+<div id="donate-box">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/wechatimg.jpg" alt="No donate img !">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/alipayimg.jpg" alt="No donate img !">				
+	</div>
+
+	<span class="donate-word slideDownMin">谢谢您请我吃糖果！</span>
+
+	<div class="donate-list fadeIn">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+
+
+
+
+<div id="comment"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+
+<script>
+    new Valine({
+    el: '#comment',
+    notify:false, 
+    verify:false, 
+    app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+    app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',  
+    path:window.location.pathname, 
+    avatar:'mm' ,
+    guest_info:['nick','mail']
+    });
+</script>
+
+
+
+
+
+<style type="text/css">
+#comment .wrap{
+    margin: 2px auto;
+}
+#comment input{
+    font-size: 16px;
+}
+</style>
+<script>
+//set the placeholder
+$(function(){
+    $('.vnick').attr('placeholder','昵称');
+    $('.veditor').attr('placeholder','说点什么吧...');
+    $('.vmail').attr('placeholder','邮箱');   
+})
+</script>
+
+
+
+	
+
+
+  
+
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-category" href="/categories">
+    分类</a>
+
+
+    <div class="small-tag">
+         
+          <a href="/categories/Events/">Events</a>     
+         
+          <a href="/categories/python学习/">python学习</a>     
+         
+          <a href="/categories/算法基础/">算法基础</a>     
+         
+          <a href="/categories/机器学习/">机器学习</a>     
+         
+          <a href="/categories/教程/">教程</a>     
+         
+          <a href="/categories/生活随想/">生活随想</a>     
+        
+    </div>
+
+  </div>
+
+  
+
+
+  
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+
+
+    <div class="small-tag">
+
+      <a href="/tags/AI-场景识别-Keras/" style="font-size: 13px;">AI,场景识别,Keras</a> <a href="/tags/Git-Github/" style="font-size: 13px;">Git,Github</a> <a href="/tags/python-str-repr/" style="font-size: 13px;">python,str,repr</a> <a href="/tags/字符串-查找-匹配/" style="font-size: 13px;">字符串,查找,匹配</a> <a href="/tags/字符串，查找，替换/" style="font-size: 13px;">字符串，查找，替换</a> <a href="/tags/排序-冒泡/" style="font-size: 13px;">排序,冒泡</a> <a href="/tags/排序-快排/" style="font-size: 13px;">排序,快排</a> <a href="/tags/排序-插入/" style="font-size: 13px;">排序,插入</a> <a href="/tags/排序-选择/" style="font-size: 13px;">排序,选择</a> <a href="/tags/数组-查找-排序/" style="font-size: 13px;">数组,查找,排序</a> <a href="/tags/数组，查找/" style="font-size: 13px;">数组，查找</a> <a href="/tags/树-重建/" style="font-size: 13px;">树,重建</a> <a href="/tags/激活函数-sigmoid/" style="font-size: 13px;">激活函数,sigmoid</a> <a href="/tags/生活，小情趣，大道理/" style="font-size: 13px;">生活，小情趣，大道理</a> <a href="/tags/递归-循环/" style="font-size: 13px;">递归,循环</a> <a href="/tags/链表，剑指Offer/" style="font-size: 13px;">链表，剑指Offer</a> <a href="/tags/队列-栈/" style="font-size: 13px;">队列,栈</a>
+
+    </div>
+  </div>
+
+  
+ 
+
+
+
+</article>
+
+
+<div id="toc" class="fadeIn">		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/post.js"></script>
+</section>
+
+     
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+	 	2017-
+	 
+
+	 2018
+	 Zz-Krystal	 
+
+	 </div>
+</footer> 
+    
+
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
+ga('send', 'pageview');
+
+</script>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
