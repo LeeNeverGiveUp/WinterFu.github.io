@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  
+  
+  <title>  排序（六）：堆排序 |   Zz-Krystal</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Winter&#39;s 部落格</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签
+              </a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于
+              </a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+        
+        
+    </div>  
+  </nav>
+</header>
+
+     <div class="container">   
+      
+        
+        <section id="post">
+        
+        
+
+         <article class="post">
+
+<div class="post-head">
+
+	<span class="post-title">	
+		排序（六）：堆排序
+	</span>
+
+
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/01/12 15:40:46 	
+		</time>
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		3013
+		</span>
+
+
+		
+		
+
+<span class="post-visitor">
+		<span class="iconfont icon-eye"></span>
+		<span class="post-count" id="post-leancloud-count"></span>
+</span>
+
+<script src="//cdn1.lncld.net/static/js/3.3.0/av-min.js"></script>
+<script>
+var app_id = 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz';
+var app_key = 'oh9tizsnvV2vNvWgqEvoNtQO';
+AV.init({
+  appId: app_id,
+  appKey: app_key
+});
+</script>
+<script src="/js/leancloud.js"></script>
+
+ 	
+			
+		
+	</div>
+
+</div>
+ 
+
+
+  <div class="post-content slideDownMin">
+   
+    <p>摘要：堆排序（Heap Sort)是一种利用堆的性质进行的一种选择排序算法。<br><img src="/2018/01/12/排序6：堆排序/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;在介绍堆排序之前，需要先说明一下什么是<font color="red">“堆”</font>？堆又被称为<font color="red">优先队列（priority queue）</font>，尽管名为优先队列，但是堆不是队列。在队列中我们经常做的操作就是入队和出队，其中出队是按照进入队列的顺序来取元素的，而在堆中我们是按照元素的<font color="red">优先级</font>取出元素的。<br><a id="more"></a><br>&ensp;&ensp;这里的优先级就好像我们候机的时候，无论谁先到达候机大厅，总是头等舱的乘客先登机，然后是商务舱乘客，最后才是经济舱。每个乘客的机票对应头等舱、商务舱、经济舱三种键值中的一个。头等舱–&gt;商务舱–&gt;经济舱依次享有从高到低的优先级，这也就是堆取元素的规则。<br>&ensp;&ensp;堆的一个经典实现是<font color="red">完全二叉树</font>（complete binary tree）,这样实现的堆称为<font color="red">二叉堆</font>，也就是很多数据结构书中的堆啦。<br>&ensp;&ensp;前面提到二叉堆是完全二叉树或者近似完全二叉树，那么二叉堆又有哪些性质呢？</p>
+<p> 1.任一节点的键值总是大于或者等于（小于或者等于）左右子树节点的键值，前者称为<font color="red">最大堆</font>如下图左，后者称为<font color="red">最小堆</font>如下图右。</p>
+<ol>
+<li>每一个节点的左子树和有字数都是一个二叉堆<br><img src="/2018/01/12/排序6：堆排序/f1.jpg" alt=""><br>&ensp;&ensp;堆的存储方式：一般用<font color="red">“数组”</font>来表示堆，父节点和子节点的位置存在一定的关系。<br><img src="/2018/01/12/排序6：堆排序/f2.jpg" alt=""><br>&ensp;&ensp;对于父节点和子节点的位置有如下关系（这是建立数组下标从0开始的情况，若数组下标从一开始，则左右孩子的下标还需要多减掉一个1）：</li>
+<li>索引为i的节点的左孩子的索引是（2*i+1）</li>
+<li>索引为i的节点的右孩子的索引是（2*i+2)</li>
+<li>索引为i的节点的父节点的索引是 floor((i - 1) / 2)</li>
+</ol>
+<h3 id="二、算法思想"><a href="#二、算法思想" class="headerlink" title="二、算法思想"></a><strong>二、算法思想</strong></h3><p>&ensp;&ensp;上面已经介绍了堆的概念和性质，那么对于一个无序数组如何利用堆的性质对其进行排序呢？主要步骤可以描述为两个过程：</p>
+<ol>
+<li>根据初始数组去构造初始堆（构建一个完全二叉树，保证所有的父节点对应的键值都比其左右孩子节点对应的键值大）。</li>
+<li>每次交换第一个和最后一个元素，输出最后一个元素（最大值），然后把剩下的元素重新调整为最大堆。</li>
+</ol>
+<h4 id="1、算法图解"><a href="#1、算法图解" class="headerlink" title="1、算法图解"></a><strong>1、算法图解</strong></h4><p>&ensp;&ensp;以数列{16, 7, 3, 20, 17, 8}为例，我们先来构造初始堆，需要先构建完全二叉树（并不是真的写代码构建，只是把数组看成完全二叉树去操作），然后调整调换节点使其满足最大堆的要求。<br>&ensp;&ensp;根据上面的数组元素构建一个完全二叉树，得到<br><img src="/2018/01/12/排序6：堆排序/f3.jpg" alt=""><br>&ensp;&ensp;然后需要调整节点，构造初始堆，则从最后一个非叶节点开始调整，调整过程如下：<br><img src="/2018/01/12/排序6：堆排序/f4.jpg" alt=""> </p>
+<ol>
+<li>程序从最后一个非叶节点即节点3开始。判断其又孩子：8 &gt; 3，则把8调整上去。</li>
+<li>节点3下无孩子，判断结束。继续往前判断非叶节点即节点7，判断其左右孩子：20和17，20最大故将其调整上去。</li>
+<li>节点7下无孩子，判断结束。继续往前一步，到达节点16，判断其左右孩子：20和8，其中20最大，将其调整上去。</li>
+<li>判断节点16下左右孩子：7和17，17最大将其调整上去。</li>
+<li>节点16下无孩子，判断结束。遍历已至头部，整个过程结束，得到最大堆。</li>
+</ol>
+<p>&ensp;&ensp;上面我们已经将无需数组变最大堆了，那么接下来的操作就很简单了：<br><img src="/2018/01/12/排序6：堆排序/f5.jpg" alt=""><br><img src="/2018/01/12/排序6：堆排序/f6.jpg" alt=""><br>&ensp;&ensp;上面提到需要从最后一个非叶节点开始，那么如何确定最后一个非叶节点呢？ 其实这是有公式的，设二叉树的总结点数为n，则最后一个非叶节点是第[n / 2]个节点。</p>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; 根据上面的算法流程，不难实现堆排序算法，首先我们用C/C++实现（注意这里我们使用数组是从索引0开始的）:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#include</span> &lt;iostream&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;vector&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">void HeapAdjust(vector&lt;int&gt; &amp;list, int parent, int length)&#123;</div><div class="line">	int temp = list[parent];					// temp保存当前父节点</div><div class="line">	int child = 2 * parent + 1;					// 先获得左孩子</div><div class="line"></div><div class="line">	while (child &lt; length)&#123;</div><div class="line">		<span class="comment">// 如果有右孩子结点，并且右孩子结点的值大于左孩子结点，则选取右孩子结点</span></div><div class="line">		<span class="keyword">if</span> (child + <span class="number">1</span> &lt; length &amp;&amp; list[child] &lt; list[child + <span class="number">1</span>])&#123;</div><div class="line">			child++;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 如果有右孩子结点，并且右孩子结点的值大于左孩子结点，则选取右孩子结点</span></div><div class="line">		<span class="keyword">if</span> (temp &gt;= list[child])&#123;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 把孩子结点的值赋给父结点</span></div><div class="line">		list[parent] = list[child];</div><div class="line"></div><div class="line">		<span class="comment">// 选取孩子结点的左孩子结点,继续向下筛选</span></div><div class="line">		parent = child;</div><div class="line">		child = 2 * parent + 1;</div><div class="line">	&#125;</div><div class="line">	list[parent] = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">vector&lt;int&gt; HeadSort(vector&lt;int&gt; list)&#123;</div><div class="line">	int length = list.size();</div><div class="line">	<span class="comment">// 循环建立初始堆</span></div><div class="line">	for (int i = length / 2; i &gt;= 0; i--)&#123;</div><div class="line">		HeapAdjust(list, i, length);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 进行n-1次循环，完成排序</span></div><div class="line">	for (int i = length - 1; i &gt; 0; i--)&#123;</div><div class="line">		<span class="comment">// 最后一个元素和第一元素进行交换</span></div><div class="line">		int temp = list[i];</div><div class="line">		list[i] = list[0];</div><div class="line">		list[0] = temp;</div><div class="line"></div><div class="line">		<span class="comment">// 筛选 R[0] 结点，得到i-1个结点的堆</span></div><div class="line">		HeapAdjust(list, 0, i);</div><div class="line">	&#125;</div><div class="line">	return list;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="三、时间空间复杂度及算法稳定性分析"><a href="#三、时间空间复杂度及算法稳定性分析" class="headerlink" title="三、时间空间复杂度及算法稳定性分析"></a><strong>三、时间空间复杂度及算法稳定性分析</strong></h3><p>&ensp;&ensp;时间复杂度的计算主要分为两部分，第一部分：首先计算堆的时间，n个节点，从第0层至第logn层，对于第i层的第2i个节点如果往下走logn - 1步，那么走完所有的步时间为O（n）;第二部分是排序的时间：HeapAdjust() 耗时 logn，共 n 次，故排序时间为 O(nlogn)。</p>
+<p>&ensp;&ensp;堆的存储表示是顺序的。因为堆所对应的二叉树为完全二叉树，而完全二叉树通常采用顺序存储方式。当想得到一个序列中第k个最小的元素之前的部分排序序列，最好采用堆排序。</p>
+<p>&ensp;&ensp;堆排序是一种不稳定算法。因为在堆的调整过程中，关键字进行比较和交换所走的是该结点到叶子结点的一条路径，因此对于相同的关键字就可能出现排在后面的关键字被交换到前面来的情况。 </p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><strong>参考资料</strong></h4><p>&ensp;&ensp;<a href="https://61mon.com/index.php/archives/202/" target="_blank" rel="external">https://61mon.com/index.php/archives/202/</a><br>&ensp;&ensp;<a href="https://mp.weixin.qq.com/s/HIspLRoS6vWtxMQ0TJhQpA" target="_blank" rel="external">https://mp.weixin.qq.com/s/HIspLRoS6vWtxMQ0TJhQpA</a></p>
+    
+
+  </div>  
+ 
+
+  <div class="post-bottom">
+		<div class="meta-info">
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-category"></li>
+				<a class="category-link" href="/categories/算法基础/">算法基础</a>
+			</ul>
+			
+
+
+	
+			<ul class="ul">
+				<li class="li iconfont icon-tag"></li>
+				<a class="tag-link" href="/tags/排序-堆-完全二叉树/">排序,堆,完全二叉树</a>
+			</ul>
+			
+</div> 
+		
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+
+	<div class="-mob-share-list">
+
+		                  
+            <span class="iconfont icon-share-qq -mob-share-qq"></span>
+     	                  
+            <span class="iconfont icon-share-weixin -mob-share-weixin"></span>
+     	                  
+            <span class="iconfont icon-share-weibo -mob-share-weibo"></span>
+     	                  
+            <span class="iconfont icon-share-douban -mob-share-douban"></span>
+     	                  
+            <span class="iconfont icon-share-facebook -mob-share-facebook"></span>
+     	                  
+            <span class="iconfont icon-share-twitter -mob-share-twitter"></span>
+     	                  
+            <span class="iconfont icon-share-tumblr -mob-share-tumblr"></span>
+     	                  
+            <span class="iconfont icon-share-google -mob-share-google"></span>
+     	  
+	</div>    
+
+  </div>
+
+
+
+
+ <nav class="nav">
+
+  
+     
+
+
+
+    
+       <div class="nav-next">      
+        <a  class="nav-link" href="/2018/01/12/排序5：shell排序/">      
+
+             
+         <span class="nav-title">排序（五）：shell排序</span>
+          <li class="li iconfont icon-right"></li>
+        </a>
+        </div>
+    
+
+</nav>   
+
+
+
+
+<div class="donate-btn iconfont icon-donate"></div>
+
+<div id="donate-box">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/wechatimg.jpg" alt="No donate img !">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/alipayimg.jpg" alt="No donate img !">				
+	</div>
+
+	<span class="donate-word slideDownMin">谢谢您请我吃糖果！</span>
+
+	<div class="donate-list fadeIn">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+
+
+
+
+<div id="comment"></div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+
+<script>
+    new Valine({
+    el: '#comment',
+    notify:false, 
+    verify:false, 
+    app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+    app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',  
+    path:window.location.pathname, 
+    avatar:'mm' ,
+    guest_info:['nick','mail']
+    });
+</script>
+
+
+
+
+
+<style type="text/css">
+#comment .wrap{
+    margin: 2px auto;
+}
+#comment input{
+    font-size: 16px;
+}
+</style>
+<script>
+//set the placeholder
+$(function(){
+    $('.vnick').attr('placeholder','昵称');
+    $('.veditor').attr('placeholder','说点什么吧...');
+    $('.vmail').attr('placeholder','邮箱');   
+})
+</script>
+
+
+
+	
+
+
+  
+
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-category" href="/categories">
+    分类</a>
+
+
+    <div class="small-tag">
+         
+          <a href="/categories/python学习/">python学习</a>     
+         
+          <a href="/categories/Events/">Events</a>     
+         
+          <a href="/categories/算法基础/">算法基础</a>     
+         
+          <a href="/categories/机器学习/">机器学习</a>     
+         
+          <a href="/categories/教程/">教程</a>     
+         
+          <a href="/categories/生活随想/">生活随想</a>     
+        
+    </div>
+
+  </div>
+
+  
+
+
+  
+  <div class="post-widget">
+    
+    <a class="post-widget-title iconfont icon-tag" href="/tags"> 标签</a>
+
+
+    <div class="small-tag">
+
+      <a href="/tags/AI-场景识别-Keras/" style="font-size: 13px;">AI,场景识别,Keras</a> <a href="/tags/Git-Github/" style="font-size: 13px;">Git,Github</a> <a href="/tags/python-str-repr/" style="font-size: 13px;">python,str,repr</a> <a href="/tags/字符串-查找-匹配/" style="font-size: 13px;">字符串,查找,匹配</a> <a href="/tags/字符串，查找，替换/" style="font-size: 13px;">字符串，查找，替换</a> <a href="/tags/排序-shell/" style="font-size: 13px;">排序,shell</a> <a href="/tags/排序-冒泡/" style="font-size: 13px;">排序,冒泡</a> <a href="/tags/排序-堆-完全二叉树/" style="font-size: 13px;">排序,堆,完全二叉树</a> <a href="/tags/排序-快排/" style="font-size: 13px;">排序,快排</a> <a href="/tags/排序-插入/" style="font-size: 13px;">排序,插入</a> <a href="/tags/排序-选择/" style="font-size: 13px;">排序,选择</a> <a href="/tags/数组-查找-排序/" style="font-size: 13px;">数组,查找,排序</a> <a href="/tags/数组，查找/" style="font-size: 13px;">数组，查找</a> <a href="/tags/树-重建/" style="font-size: 13px;">树,重建</a> <a href="/tags/激活函数-sigmoid/" style="font-size: 13px;">激活函数,sigmoid</a> <a href="/tags/生活，小情趣，大道理/" style="font-size: 13px;">生活，小情趣，大道理</a> <a href="/tags/递归-循环/" style="font-size: 13px;">递归,循环</a> <a href="/tags/链表，剑指Offer/" style="font-size: 13px;">链表，剑指Offer</a> <a href="/tags/队列-栈/" style="font-size: 13px;">队列,栈</a>
+
+    </div>
+  </div>
+
+  
+ 
+
+
+
+</article>
+
+
+<div id="toc" class="fadeIn">		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open" onclick="change()"> 目录 </span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/post.js"></script>
+</section>
+
+     
+    
+    </div>        
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+
+      
+
+             
+              
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container">
+            <input type="text" placeholder="搜索点什么吧..." id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="slide-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+
+    
+   	 <div class="foot-busuanzi">	
+
+     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+   
+     <span class="iconfont icon-pv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ 
+     <span class="iconfont icon-uv"></span>
+     <span id="busuanzi_value_site_uv"></span>
+
+   	 </div>
+    
+
+    	
+	<div class="foot-link">
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a> 
+
+	 </div>	
+
+	 <div class="foot-copyright">
+	  &copy; 
+	 
+	 	2017-
+	 
+
+	 2018
+	 Zz-Krystal	 
+
+	 </div>
+</footer> 
+    
+
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){
+	i['GoogleAnalyticsObject']=r;
+	i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'a30844fa2bcbce0a9e001fe06cefeddf', 'auto');
+ga('send', 'pageview');
+
+</script>
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
