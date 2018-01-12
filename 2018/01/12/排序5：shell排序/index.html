@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  排序（四）：选择排序 |   Zz-Krystal</title>
+  <title>  排序（五）：Shell排序 |   Zz-Krystal</title>
 
  
   
@@ -96,21 +96,21 @@
 <div class="post-head">
 
 	<span class="post-title">	
-		排序（四）：选择排序
+		排序（五）：shell排序
 	</span>
 
 
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2018/01/04 17:06:48 	
+		2018/01/12 09:45:16 	
 		</time>
 
 
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		1864
+		2380
 		</span>
 
 
@@ -144,24 +144,25 @@ AV.init({
 
   <div class="post-content slideDownMin">
    
-    <p>摘要：选择排序（Selection Sort)是一种最简单直接的排序算法。<br><img src="/2018/01/04/排序4：选择排序/ppo.jpg" alt=""></p>
-<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;选择排序是一种简单直接的选择排序算法，每趟在未排序的数列中找到最小（或者最大）的元素，然后将其放在数列的起始（或末尾）位置。<br><a id="more"></a></p>
-<h3 id="二、算法思想"><a href="#二、算法思想" class="headerlink" title="二、算法思想"></a><strong>二、算法思想</strong></h3><p>&ensp;&ensp;首先在未排序的数列中找到<font color="red">最小(or最大)</font>元素，然后将其存放到数列的<font color="red">起始(or末尾)</font>位置；接着，再从剩余未排序的元素中继续寻找最小(or最大)元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
-<h4 id="1、算法图解"><a href="#1、算法图解" class="headerlink" title="1、算法图解"></a><strong>1、算法图解</strong></h4><p>&ensp;&ensp;以数列{20,40,30,10,60,50}为例，演示其选择排序过程，示意图如下：<br> <img src="/2018/01/04/排序4：选择排序/f1.jpg" alt=""><br> &ensp;&ensp;排序流程如下：</p>
-<ul>
-<li>第1趟：i=0。找出a[1…5]中的最小值a[3]=10，然后将a[0]和a[3]互换。 数组变化：20,40,30,10,60,50– &gt; 10,40,30,20,60,50</li>
-<li>第2趟：i=1。找出a[2…5]中的最小值a[3]=20，然后将a[1]和a[3]互换。 数组变化：10,40,30,20,60,50– &gt; 10,20,30,40,60,50</li>
-<li>第3趟：i=2。找出a[3…5]中的最小值，由于该最小值大于a[2]，该趟不做任何处理。</li>
-<li>第4趟：i=3。找出a[4…5]中的最小值，由于该最小值大于a[3]，该趟不做任何处理。</li>
-<li>第5趟：i=4。交换a[4]和a[5]的数据。 数组变化：10,20,30,40,60,50 – &gt; 10,20,30,40,50,60</li>
-</ul>
-<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; 根据上面的思路，不难写出选择排序的实现，首先我们用C/C++实现:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#include</span> &lt;iostream&gt;</div><div class="line"><span class="selector-id">#include</span> &lt;vector&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line"><span class="comment">// 简单选择排序</span></div><div class="line">vector&lt;int&gt; SelectSort(vector&lt;int&gt; list)&#123;</div><div class="line">	<span class="comment">// 需要遍历获得最小值的次数</span></div><div class="line">	<span class="comment">// 要注意一点，当要排序 N 个数，已经经过 N-1 次遍历后，已经是有序数列</span></div><div class="line">	vector&lt;int&gt; result = list;</div><div class="line">	for (int i = 0; i &lt; result.size(); i++)&#123;</div><div class="line">		<span class="comment">// 用来保存最小值得索引</span></div><div class="line">		int index = i;</div><div class="line">		<span class="comment">// 用来保存最小值得索引</span></div><div class="line">		for (int j = i + 1; j &lt; result.size(); j++)&#123;</div><div class="line">			<span class="keyword">if</span> (result[index] &gt; result[j])&#123;</div><div class="line">				index = j;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 将找到的第i个小的数值放在第i个位置上</span></div><div class="line">		swap(result[i], result[index]);</div><div class="line">		cout &lt;&lt; "第" &lt;&lt; i + 1&lt;&lt; "趟:\t";</div><div class="line">		for (int i = 0; i &lt; result.size(); i++)&#123;</div><div class="line">			cout &lt;&lt; result[i] &lt;&lt; " ";</div><div class="line">		&#125;</div><div class="line">		cout &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	return result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    <p>摘要：希尔排序（Shell Sort)也称递减量排序算法，以其设计者希尔(Donald Shell)的名字命名，该算法由1959年公布。<br><img src="/2018/01/12/排序5：shell排序/ppo.jpg" alt=""></p>
+<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h3><p>&ensp;&ensp;shell排序是一种插入排序，它是直接插入排序算法的一种威力加强版。<br><a id="more"></a></p>
+<h3 id="二、算法思想"><a href="#二、算法思想" class="headerlink" title="二、算法思想"></a><strong>二、算法思想</strong></h3><p>&ensp;&ensp;该算法的基本思想是：将待排元素序列切割成若干个子序列（由相隔某个“增量”（gap）的元素组成），然后对这些子序列分别进行直接插入排序，然后按照规则一次缩减增量再进行排序，待整个序列中的元素基本有序（gap足够小）时，再对全体元素进行一次直接插入排序，即可完成所有排序工作。</p>
+<h4 id="1、算法图解"><a href="#1、算法图解" class="headerlink" title="1、算法图解"></a><strong>1、算法图解</strong></h4><p>&ensp;&ensp;以n=10的一个数列{49, 38, 65, 97, 26, 13, 27, 49, 55, 4}为例，演示其选择排序过程，示意图如下：<br>&ensp;&ensp;第一次的gap我们选择数组长度的一半：gap = 10 / 2 = 5<br> <img src="/2018/01/12/排序5：shell排序/f1.jpg" alt=""><br>&ensp;&ensp;其中，1A,1B，2A,2B等为分组标记，数字同样的表示在同一组，大写字母表示是该组的第几个元素， 每次对同一组的数据进行直接插入排序。即分成了五组(49, 13) (38, 27) (65, 49)  (97, 55)  (26, 4)这样每组排序后就变成了(13, 49)  (27, 38)  (49, 65)  (55, 97)  (4, 26)，下同。<br> 排序后的数组变成：{13, 27, 49, 55, 4, 49, 38, 65, 97, 26}<br>&ensp;&ensp;第二次gap = 5 / 2 = 2<br><img src="/2018/01/12/排序5：shell排序/f2.png" alt=""><br>&ensp;&ensp;第三次gap = 2 / 2 = 1<br><img src="/2018/01/12/排序5：shell排序/f3.jpg" alt=""><br>&ensp;&ensp;第四次gap = 1 / 2 = 0 排序完毕得到有序数组<br><img src="/2018/01/12/排序5：shell排序/f4.jpg" alt=""><br>&ensp;&ensp;注意：每个小分组的元素进行直接插入排序后，直接映射到原数组，发生交换就互换，否则还  保持原来的顺序。可以看到图中有两个相等数值的元素“5”，通过排序过程我们可以看到，这两个元素位置交换了，所以希尔排序是不稳定算法。</p>
+<h4 id="2、具体实现"><a href="#2、具体实现" class="headerlink" title="2、具体实现"></a><strong>2、具体实现</strong></h4><p>&ensp;&ensp; 根据上面的思路，不难写出shell排序的实现，首先我们用C/C++实现:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">void ShellSort(int array[], int n)</div><div class="line">&#123;</div><div class="line">    for (int gap = n &gt;&gt; 1; gap &gt; 0; gap &gt;&gt;= 1)</div><div class="line">    &#123;</div><div class="line">        for (int i = gap; i &lt; n; i++)</div><div class="line">        &#123;</div><div class="line">            int temp = array[i];</div><div class="line">            int j = i - gap;</div><div class="line">            </div><div class="line">            while (j &gt;= <span class="number">0</span> &amp;&amp; array[j] &gt; temp)</div><div class="line">            &#123;</div><div class="line">                array[j + gap] = array[j];</div><div class="line">                j -= gap;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            array[j + gap] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>&ensp;&ensp;人生苦短，我用Python:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def select_sort(lists):</div><div class="line">    # 选择排序</div><div class="line">    count = len(lists)</div><div class="line">    <span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(<span class="number">0</span>, count):</div><div class="line">        min = i</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="selector-tag">i</span> + <span class="number">1</span>, count):</div><div class="line">            <span class="keyword">if</span> lists[min] &gt; lists[j]:</div><div class="line">                min = j</div><div class="line">        lists[min], lists[i] = lists[i], lists[min]</div><div class="line">    return lists</div></pre></td></tr></table></figure>
-<h3 id="三、时间空间复杂度及算法稳定性分析"><a href="#三、时间空间复杂度及算法稳定性分析" class="headerlink" title="三、时间空间复杂度及算法稳定性分析"></a><strong>三、时间空间复杂度及算法稳定性分析</strong></h3><p>&ensp;&ensp;选择排序的时间复杂度是O(N2)：假设被排序的数列中有N个数。遍历一趟的时间复杂度是O(N)，需要遍历多少次呢？N-1次因此，选择排序的时间复杂度是O(N2)。</p>
-<p>&ensp;&ensp;选择排序需要占用一个临时空间，用于保存最小值的索引，所以空间复杂度是1.</p>
-<p>&ensp;&ensp;选择排序是稳定的算法，它满足稳定算法的定义：假设在数列中存在a[i]=a[j]，若在排序之前，a[i]在a[j]前面；并且排序之后，a[i]仍然在a[j]前面。则这个排序算法是稳定的！</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line"></div><div class="line">def ShellSort(input_list):</div><div class="line">	<span class="keyword">if</span> len(input_list) == <span class="number">0</span>:</div><div class="line">		return []</div><div class="line">	result = input_list</div><div class="line">	n = len(result)</div><div class="line">	gap = n <span class="comment">// 2</span></div><div class="line">	while gap &gt; <span class="number">0</span>:</div><div class="line">		gap <span class="comment">//= 2</span></div><div class="line">		<span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(gap, len(result)):</div><div class="line">			temp = result[i]</div><div class="line">			j = <span class="selector-tag">i</span> - gap</div><div class="line">			while j &gt;= <span class="number">0</span> and temp &lt; result[j]:</div><div class="line">				result[j + gap] = result[j]</div><div class="line">				j -= gap</div><div class="line">			result[j + gap] = temp</div><div class="line">	return result</div></pre></td></tr></table></figure>
+<h3 id="三、时间空间复杂度及算法稳定性分析"><a href="#三、时间空间复杂度及算法稳定性分析" class="headerlink" title="三、时间空间复杂度及算法稳定性分析"></a><strong>三、时间空间复杂度及算法稳定性分析</strong></h3><p>&ensp;&ensp;可想而知，步长的选择是希尔排序的重要部分。算法最开始以一定的步长进行排序，然后会继续以更小的步长进行排序，最终算法以步长为 1 进行排序。当步长为 1 时，算法变为直接插入排序，这就保证了数据一定会被全部排序。<br>&ensp;&ensp;Donald Shell 最初建议步长选择为 n / 2，并且对步长取半直到步长达到 1。虽然这样取可以比 O(n^2) 类的算法（直接插入排序）更好，但这样仍然有减少平均时间和最差时间的余地。可能希尔排序最重要的地方在于当用较小步长排序后，以前用的较大步长仍然是有序的。比如，如果一个数列以步长 5 进行了排序然后再以步长 3 进行排序，那么该数列不仅是以步长 3 有序，而且是以步长 5 有序。如果不是这样，那么算法在迭代过程中会打乱以前的顺序，那就不会以如此短的时间完成排序了。<br><img src="/2018/01/12/排序5：shell排序/f5.jpg" alt=""><br>&ensp;&ensp;<font color="red"><strong>比较</strong></font>在希尔排序中是最主要的操作，而不是交换。用这样步长序列的希尔排序比插入排序要快，甚至在小数组中比快速排序和堆排序还快，但是在涉及大量数据时希尔排序还是比快速排序慢。</p>
+<p>&ensp;&ensp;算法稳定性我们已经在上面的算法图解中提到过，shell排序是一种不稳定算法。</p>
+<p>&ensp;&ensp;<strong>直接插入排序和shell排序的比较</strong>：</p>
+<ul>
+<li>直接插入排序是稳定的；而希尔排序是不稳定的。</li>
+<li>直接插入排序更适合于原始记录基本有序的集合。</li>
+<li>希尔排序的比较次数和移动次数都要比直接插入排序少，当N越大时，效果越明显。</li>
+<li>希尔排序的比较次数和移动次数都要比直接插入排序少，当N越大时，效果越明显。</li>
+<li>直接插入排序也适用于链式存储结构；希尔排序不适用于链式结构。</li>
+</ul>
+<p>&ensp;&ensp;附注：上面希尔排序的步长选择都是从n/2開始，每次再减半，直在结束时1。事实上，它可能有另一个更有效的步骤选择，假定读者兴趣了解。看到壳牌排序步骤的描述维基百科：<a href="http://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F</a><br>&ensp;&ensp;</p>
     
 
   </div>  
@@ -181,7 +182,7 @@ AV.init({
 	
 			<ul class="ul">
 				<li class="li iconfont icon-tag"></li>
-				<a class="tag-link" href="/tags/排序-选择/">排序,选择</a>
+				<a class="tag-link" href="/tags/排序-shell/">排序,shell</a>
 			</ul>
 			
 </div> 
@@ -219,23 +220,15 @@ AV.init({
 
   
      
-      <div class="nav-prev">
-        <a class="nav-link" href="/2018/01/10/剑指offer-8：斐波那契数列的拓展/">  
-           <li class="li iconfont icon-left"></li>         
-              
-          <span class="nav-title">剑指offer（八）：斐波那契数列的拓展</span>
-        </a>
-      </div>
-    
 
 
 
     
        <div class="nav-next">      
-        <a  class="nav-link" href="/2018/01/04/排序3：直接插入排序/">      
+        <a  class="nav-link" href="/2018/01/11/字符串匹配/">      
 
              
-         <span class="nav-title">排序（三）：直接插入排序</span>
+         <span class="nav-title">字符串模式匹配</span>
           <li class="li iconfont icon-right"></li>
         </a>
         </div>
